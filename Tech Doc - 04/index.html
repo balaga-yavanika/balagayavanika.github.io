@@ -1,0 +1,2719 @@
+<!DOCTYPE html> <!-- June 17th 2021 - Thursday -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="HTML,css,Javascript">
+    <meta name="author" content="Balaga Yavanika">
+    <meta name="description"
+        content="Yavanika's simple responsive web design project on discussing critical concepts of javascript documentation which is a part of FreeCodeCamp's responsive web design challenge projects">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;400;600&family=Roboto+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <!-- <script src="https://kit.fontawesome.com/222e0fb018.js" crossorigin="anonymous" defer></script> -->
+    <link rel="stylesheet" href="/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="/Tech Doc - 04/style.css">
+    <title>Tech Doc | CCOP</title>
+</head>
+
+<body>
+    <div id="side-menu">
+        <input type="checkbox" id="menu-sidebar" />
+        <label for="menu-sidebar">
+            <i class="fad fa-gem" id="icon-button"></i>
+        </label>
+
+        <nav id="navbar">
+            <header>Tech Doc<br>CCO Javascript</header>
+            <ul id="menuitems">
+                <li><a href="#The_scope" class="nav-link">The Scope</a></li>
+                <li><a href="#JavaScript_Hoisting" class="nav-link">JavaScript Hoisting</a></li>
+                <li><a href="#Primitive_vs_Reference" class="nav-link">Primitive vs Reference</a></li>
+                <li><a href="#Type_Coercion" class="nav-link">Type Coercion</a></li>
+                <li><a href="#Recursion" class="nav-link">Recursion</a></li>
+                <li><a href="#Closures" class="nav-link">Closures</a></li>
+                <li><a href="#Asynchronous_Code" class="nav-link">Asynchronous Code</a></li>
+                <li><a href="#this_keyword" class="nav-link">The “this” Keyword</a></li>
+                <li><a href="#Prototypes" class="nav-link">Prototypes</a></li>
+                <li><a href="#Reference" class="nav-link">Reference</a></li>
+            </ul>
+            <span>Đesigñ & Ćođe • witћ <i class="fas fa-heart"></i> вч<br><a class="link"
+                    href="https://codepen.io/Yavi_25" target="_blank" title="View my CodePen Profile"
+                    rel="noopener">BALAGA YAVANIKA</a><br><br>&copy; 2021 all rights
+                reserved</span>
+
+        </nav>
+    </div>
+
+    <main id="main-doc" class="container">
+        <h1>Critical Concepts of Javascript</h1>
+
+        <!--   Section 1   -->
+        <section class="main-section" id="The_scope">
+            <header><u>The Scope</u></header>
+            <article>
+                <p>JavaScript has a feature called Scope. Though the concept of scope is not that easy to understand,
+                    But Understanding<code class="codee">scope</code>will make your code stand out, reduce errors and
+                    help
+                    you make powerful design patterns with it.</p>
+                <h2>What is Scope?</h2>
+                <p>Scope is the accessibility of variables, functions, and objects in some particular part of your code
+                    during runtime. In other words, scope determines the visibility of variables and other resources in
+                    areas of your code.</p>
+                <h2>Why Scope?</h2>
+                <p>What's the point in limiting the visibility of variables and not having everything available
+                    everywhere in your code? One advantage is that scope provides some level of security to your code.
+                    One common principle of computer security is that users should only have access to the stuff they
+                    need at a time.<br><br>&emsp;Scoping parts of your code helps improve efficiency, track bugs and
+                    reduce them. Scope also solves the naming problem when you have variables with the same name but in
+                    different scopes. Remember not to confuse scope with context. They are both different features.</p>
+                <h2>Types of Scopes</h2>
+                <p>In the JavaScript language there are two types of scopes:</p>
+                <ul>
+                    <li>Global Scope</li>
+                    <li>Local Scope</li>
+                </ul>
+                <p>Variables defined inside a function are in local scope while variables defined outside of a function
+                    are in the global scope. Each function when invoked creates a new scope.</p>
+                <h3>Global Scope</h3>
+                <p>When you start writing JavaScript in a document, you are already in the Global scope. There is only
+                    one Global scope throughout a JavaScript document. A variable is in the Global scope if it's defined
+                    outside of a function.</p>
+                <code>// the scope is by default global
+          var name = 'Peach';</code>
+                <p>Variables inside the Global scope can be accessed and altered in any other scope.</p>
+                <code>var name = 'Peach';
+
+          console.log(name); // logs 'Peach'
+
+          function logName() {
+              console.log(name); // 'name' is accessible here and everywhere else
+          }
+
+          logName(); // logs 'Peach'</code>
+                <h3>Local Scope</h3>
+                <p>Variables defined inside a function are in the local scope. And they have a different scope for every
+                    call of that function. This means that variables having the same name can be used in different
+                    functions. This is because those variables are bound to their respective functions, each having
+                    different scopes, and are not accessible in other functions.</p>
+                <code>// Global Scope
+          function someFunction() {
+          // Local Scope #1
+          function someOtherFunction() {
+          // Local Scope #2
+          }
+          }
+
+          // Global Scope
+          function anotherFunction() {
+          // Local Scope #3
+          }
+          // Global Scope</code>
+                <br>
+                <h2>Block Statements</h2>
+                <p>Block statements like<code class="codee">if</code>and<code class="codee">switch</code>conditions
+                    or<code class="codee">for</code>and while<code class="codee">loops</code>, unlike functions, don't
+                    create a
+                    new scope. Variables defined inside of a block statement will remain in the scope they were already
+                    in.</p>
+                <code>if (true) {
+                // this 'if' conditional block doesn't create a new scope
+                var name = 'Peach'; // name is still in the global scope
+                }
+                
+                console.log(name); // logs 'Peach'</code>
+                <p>ECMAScript 6 introduced the<code class="codee">let</code>and <code
+                        class="codee">const</code>keywords. These keywords can be used in place of the<code
+                        class="codee">var</code>keyword.</p>
+                <code>var name = 'Peach';
+                
+                let likes = 'Coding';
+                const skills = 'Javascript and PHP';</code>
+                <p>Contrary to the<code class="codee">var</code>keyword, the<code class="codee">let</code>and<code
+                        class="codee">const</code>keywords support the declaration of local scope inside block
+                    statements.</p>
+                <code>if (true) {
+                // this 'if' conditional block doesn't create a scope
+                
+                // name is in the global scope because of the 'var' keyword
+                var name = 'Peach';
+                // likes is in the local scope because of the 'let' keyword
+                let likes = 'Coding';
+                // skills is in the local scope because of the 'const' keyword
+                const skills = 'JavaScript and PHP';
+                }
+                
+                console.log(name); // logs 'Peach'
+                console.log(likes); // Uncaught ReferenceError: likes is not defined
+                console.log(skills); // Uncaught ReferenceError: skills is not defined</code>
+                <p class="note"><span>NOTE:</span><br>Global scope lives as long as your application lives. Local Scope
+                    lives
+                    as long as
+                    your
+                    functions are called and
+                    executed.</p>
+                <h2>Context</h2>
+                <p>Many developers often confuse scope and context as if they equally refer to the same concepts. But
+                    this is not the case.
+                    Scope is what we discussed above and <em>context</em> is used to refer to the value of<code
+                        class="codee">this</code>in some particular part of your code.
+                    Scope refers to the visibility of variables and context refers to the value of<code
+                        class="codee">this</code>in the same scope. We can also
+                    change the context using function methods, which we will discuss later. In the global scope context
+                    is always the Window
+                    object.</p>
+                <code>// logs: Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage…}
+                    console.log(this);
+                    
+                    function logFunction() {
+                    console.log(this);
+                    }
+                    // logs: Window {speechSynthesis: SpeechSynthesis, caches: CacheStorage, localStorage: Storage…}
+                    // because logFunction() is not a property of an object
+                    logFunction();</code>
+                <p>If scope is in the method of an object, context will be the object the method is part of.</p>
+                <code>class User {
+                logName() {
+                console.log(this);
+                }
+                }
+                
+                (new User).logName(); // logs User {}</code>
+                <p class="note"><span>NOTE:</span><br>(new User).logName() is a short way of storing your object in a
+                    variable and then calling the logName function on it.
+                    Here, you don't need to create a new variable.</p>
+                <p>One thing you'll notice is that the value of context behaves differently if you call your functions
+                    using the<code class="codee">new</code>
+                    keyword. The context will then be set to the instance of the called function. Consider one of the
+                    examples above with
+                    the function called with the<code class="codee">new</code>keyword.</p>
+                <h2>Execution Context</h2>
+                <p>The word <em>context</em> in <strong>Execution Context</strong> refers to scope and not context. This
+                    is a
+                    weird naming convention but because of
+                    the JavaScript specification, we are tied to it.<br><br>
+
+                    JavaScript is a single-threaded language so it can only execute a single task at a time. The rest of
+                    the tasks are
+                    queued in the Execution Context. As I told you earlier that when the JavaScript interpreter starts
+                    to execute your code,
+                    the context (scope) is by default set to be global. This global context is appended to your
+                    execution context which is
+                    actually the first context that starts the execution context.<br><br>
+
+                    After that, each function call (invocation) would append its context to the execution context. The
+                    same thing happens
+                    when an another function is called inside that function or somewhere else.</p>
+                <p class="note"><span>NOTE:</span><br>Each function creates its own execution context.</p>
+                <p>Once the browser is done with the code in that context, that context will then be popped off from the
+                    execution context
+                    and the state of the current context in the execution context will be transferred to the parent
+                    context. The browser
+                    always executes the execution context that is at the top of the execution stack (which is actually
+                    the innermost level
+                    of scope in your code).</p>
+                <p class="note"><span>NOTE:</span><br>There can only be one global context but any number of function
+                    contexts.</p>
+                <p>The execution context has two phases of creation and code execution.</p>
+                <h3>Creation Phase</h3>
+                <p>The first phase that is the creation phase is present when a function is called but its code is not
+                    yet executed. Three
+                    main things that happen in the creation phase are:</p>
+                <ul>
+                    <li>Creation of the Variable (Activation) Object,</li>
+                    <li>Creation of the Scope Chain, and</li>
+                    <li>Setting of the value of context (<code class="codee">this</code>)</li>
+                </ul>
+                <h4>Variable Object</h4>
+                <p>The Variable Object, also known as the activation object, contains all of the variables, functions
+                    and other
+                    declarations that are defined in a particular branch of the execution context. When a function is
+                    called, the
+                    interpreter scans it for all resources including function arguments, variables, and other
+                    declarations. Everything, when
+                    packed into a single object, becomes the the Variable Object.</p>
+                <code>'variableObject': {
+                // contains function arguments, inner variable and function declarations
+                }</code>
+                <h4>Scope Chain</h4>
+                <p>In the creation phase of the execution context, the scope chain is created after the variable object.
+                    The scope chain
+                    itself contains the variable object. The Scope Chain is used to resolve variables. When asked to
+                    resolve a variable,
+                    JavaScript always starts at the innermost level of the code nest and keeps jumping back to the
+                    parent scope until it
+                    finds the variable or any other resource it is looking for. The scope chain can simply be defined as
+                    an object
+                    containing the variable object of its own execution context and all the other execution contexts of
+                    it parents, an
+                    object having a bunch of other objects.</p>
+                <code>'scopeChain': {
+                // contains its own variable object and other variable objects of the parent execution contexts
+                }</code>
+                <h4>The Execution Context Object</h4>
+                <p>The execution context can be represented as an abstract object like this:</p>
+                <code>executionContextObject = {
+                'scopeChain': {}, // contains its own variableObject and other variableObject of the parent execution contexts
+                'variableObject': {}, // contains function arguments, inner variable and function declarations
+                'this': valueOfThis
+                }</code>
+                <h3>Code Execution Phase</h3>
+                <p>In the second phase of the execution context, that is the code execution phase, other values are
+                    assigned and the code
+                    is finally executed.</p>
+                <h2>Lexical Scope</h2>
+                <p>Lexical Scope means that in a nested group of functions, the inner functions have access to the
+                    variables and other
+                    resources of their parent scope. This means that the child functions are lexically bound to the
+                    execution context of
+                    their parents. Lexical scope is sometimes also referred to as Static Scope.</p>
+                <code>function grandfather() {
+                var name = 'Peach';
+                // likes is not accessible here
+                function parent() {
+                // name is accessible here
+                // likes is not accessible here
+                function child() {
+                // Innermost level of the scope chain
+                // name is also accessible here
+                var likes = 'Coding';
+                }
+                }
+                }</code>
+                <p>The thing you will notice about lexical scope is that it works forward, meaning<code
+                        class="codee">name</code>can be accessed by its children's
+                    execution contexts. But it doesn't work backward to its parents, meaning that the variable<code
+                        class="codee">likes</code>cannot be accessed by
+                    its parents. This also tells us that variables having the same name in different execution contexts
+                    gain precedence from
+                    top to bottom of the execution stack. A variable, having a name similar to another variable, in the
+                    innermost function
+                    (topmost context of the execution stack) will have higher precedence.</p>
+                <h2>Closures</h2>
+                <p>The concept of closures is closely related to Lexical Scope, which we studied above. A Closure is
+                    created when an inner
+                    function tries to access the scope chain of its outer function meaning the variables outside of the
+                    immediate lexical
+                    scope. Closures contain their own scope chain, the scope chain of their parents and the global
+                    scope.</p>
+                <p class="note"><span>NOTE:</span><br>A closure can not only access the variables defined in its outer
+                    function but also the arguments of the outer function.</p>
+                <p>A closure can also access the variables of its outer function even after the function has returned.
+                    This allows the
+                    returned function to maintain access to all the resources of the outer function.<br>When you return
+                    an inner function from a function, that returned function will not be called when you try to call
+                    the
+                    outer function. You must first save the invocation of the outer function in a separate variable and
+                    then call the
+                    variable as a function. Consider this example:</p>
+                <code>function greet() {
+                name = 'Peach';
+                return function () {
+                console.log('Hi ' + name);
+                }
+                }
+                
+                greet(); // nothing happens, no errors
+                
+                // the returned function from greet() gets saved in greetLetter
+                greetLetter = greet();
+                
+                // calling greetLetter calls the returned function from the greet() function
+                greetLetter(); // logs 'Hi Peach'</code>
+                <p>The key thing to note here is<code class="codee">the greetLetter</code>function can access the name
+                    variable of the greet function even after it
+                    has been returned. One way to call the returned function from the<code
+                        class="codee">greet</code>function without variable assignment is by using
+                    parentheses<code class="codee">()</code>two times<code class="codee">()()</code>like this:</p>
+                <code>function greet() {
+                name = 'Peach';
+                return function () {
+                console.log('Hi ' + name);
+                }
+                }
+                
+                greet()(); // logs 'Hi Peach'</code>
+                <h2>Public and Private Scope</h2>
+                <p>In many other programming languages, you can set the visibility of properties and methods of classes
+                    using public,
+                    private and protected scopes. Consider this example using the PHP language:</p>
+                <code>// Public Scope
+                public $property;
+                public function method() {
+                // ...
+                }
+                
+                // Private Scope
+                private $property;
+                private function method() {
+                // ...
+                }
+                
+                // Protected Scope
+                protected $property;
+                protected function method() {
+                // ...
+                }</code>
+                <p>Encapsulating functions from the public (global) scope saves them from vulnerable attacks. But in
+                    JavaScript, there is
+                    no such thing as public or private scope. However, we can emulate this feature using closures. To
+                    keep everything
+                    separate from the global we must first encapsulate our functions within a function like this:</p>
+                <code>(function () {
+                // private scope
+                })();</code>
+                <p>The parenthesis at the end of the function tells the interpreter to execute it as soon as it reads it
+                    without
+                    invocation. We can add functions and variables in it and they will not accessible outside. But what
+                    if we want to access
+                    them outside, meaning we want some of them to be public and some of them to be private? One type of
+                    closure, we can use,
+                    is called the Module Pattern which allows us to scope our functions using both public and private
+                    scopes in an object.</p>
+                <h3>The Module Pattern</h3>
+                <p>The Module Pattern looks like this:</p>
+                <code>var Module = (function() {
+                function privateMethod() {
+                // do something
+                }
+                
+                return {
+                publicMethod: function() {
+                // can call privateMethod();
+                }
+                };
+                })();</code>
+                <p>The return statement of the Module contains our public functions. The private functions are just
+                    those that are not
+                    returned. Not returning functions makes them inaccessible outside of the Module namespace. But our
+                    public functions can
+                    access our private functions which make them handy for helper functions, AJAX calls, and other
+                    things.</p>
+                <code>Module.publicMethod(); // works
+                Module.privateMethod(); // Uncaught ReferenceError: privateMethod is not defined</code>
+                <p>One convention is to begin private functions with an underscore, and returning an anonymous object
+                    containing our public
+                    functions. This makes them easy to manage in a long object. This is how it looks:</p>
+                <code>var Module = (function () {
+                function _privateMethod() {
+                // do something
+                }
+                function publicMethod() {
+                // do something
+                }
+                return {
+                publicMethod: publicMethod,
+                }
+                })();</code>
+                <h3>Immediately-Invoked Function Expression (IIFE)</h3>
+                <p>Another type of closure is the Immediately-Invoked Function Expression (IIFE). This is a self-invoked
+                    anonymous function
+                    called in the context of window, meaning that the value of<code class="codee">this</code>is set<code
+                        class="codee">window</code>. This exposes a single global interface to
+                    interact with. This is how it looks:</p>
+                <code>(function(window) {
+                // do anything
+                })(this);</code>
+                <h2>Changing Context with .call(), .apply() and .bind()</h2>
+                <p>Call and Apply functions are used to change the context while calling a function. This gives you
+                    incredible programming
+                    capabilities (and some ultimate powers to <strong>Rule The World</strong>). To use the call or apply
+                    function, you just need to call it
+                    on the function instead of invoking the function using a pair of parenthesis and pass the context as
+                    the first argument.
+                    The function's own arguments can be passed after the context.</p>
+                <code>function hello() {
+                // do something...
+                }
+                
+                hello(); // the way you usually call it
+                hello.call(context); // here you can pass the context(value of this) as the first argument
+                hello.apply(context); // here you can pass the context(value of this) as the first argument</code>
+                <p>The difference between<code class="codee">.call()</code>and<code class="codee">.apply()</code>is that
+                    in Call, you pass the rest of the arguments as a list separated by a
+                    comma while apply allows you to pass the arguments in an array.</p>
+                <code>function introduce(name, interest) {
+                console.log('Hi! I\'m '+ name +' and I like '+ interest +'.');
+                console.log('The value of this is '+ this +'.')
+                }
+                
+                introduce('Peach', 'Coding'); // the way you usually call it
+                introduce.call(window, 'Batman', 'to save Gotham'); // pass the arguments one by one after the context
+                introduce.apply('Hi', ['Bruce Wayne', 'businesses']); // pass the arguments in an array after the context
+                
+                // Output:
+                // Hi! I'm Peach and I like Coding.
+                // The value of this is [object Window].
+                // Hi! I'm Batman and I like to save Gotham.
+                // The value of this is [object Window].
+                // Hi! I'm Bruce Wayne and I like businesses.
+                // The value of this is Hi.</code>
+                <p class="note"><span>NOTE:</span><br>Call is slightly faster in performance than Apply.</p>
+                <p>The following example takes a list of items in the document and logs them to the console one by one.
+                </p>
+                <code>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;title&gt;Things to learn&lt;/title&gt;
+                &lt;/head&gt;
+                
+                &lt;body&gt;
+                    &lt;h1&gt;Things to Learn to Rule the World&lt;/h1&gt;
+                    &lt;ul&gt;
+                        &lt;li&gt;Learn PHP&lt;/li&gt;
+                        &lt;li&gt;Learn Laravel&lt;/li&gt;
+                        &lt;li&gt;Learn JavaScript&lt;/li&gt;
+                        &lt;li&gt;Learn VueJS&lt;/li&gt;
+                        &lt;li&gt;Learn CLI&lt;/li&gt;
+                        &lt;li&gt;Learn Git&lt;/li&gt;
+                        &lt;li&gt;Learn Astral Projection&lt;/li&gt;
+                    &lt;/ul&gt;
+
+                    &lt;script&gt;
+                        // Saves a NodeList of all list items on the page in listItems
+                        var listItems = document.querySelectorAll('ul li');
+                        // Loops through each of the Node in the listItems NodeList and logs its content
+                        for (var i = 0; i &lt; listItems.length; i++) {
+                            (function () {
+                                console.log(this.innerHTML);
+                            }).call(listItems[i]);
+                        }
+
+                        // Output logs:
+                        // Learn PHP
+                        // Learn Laravel
+                        // Learn JavaScript
+                        // Learn VueJS
+                        // Learn CLI
+                        // Learn Git
+                        // Learn Astral Projection
+                    &lt;/script&gt;
+
+                    &lt;/body&gt;
+                    &lt;html&gt;
+                </code>
+                <p>The HTML only contains an unordered list of items. The JavaScript then selects all of them from the
+                    DOM. The list is
+                    looped over till the end of the items in the list. Inside the loop, we log the content of the list
+                    item to the console.<br>
+
+                    This log statement is wrapped in a function wrapped in parentheses on which the<code
+                        class="codee">call</code>function is called. The
+                    corresponding list item is passed to the call function so that the<code
+                        class="codee">the</code>keyword in the console
+                    statement logs the
+                    innerHTML of the correct object.<br>
+
+                    Objects can have methods, likewise functions being objects can also have methods. In fact, a
+                    JavaScript function comes
+                    with four built-in methods which are:</p>
+                <ul>
+                    <li>Function.prototype.apply()</li>
+                    <li>Function.prototype.bind() (Introduced in ECMAScript 5 (ES5))</li>
+                    <li>Function.prototype.call()</li>
+                    <li>Function.prototype.toString()</li>
+                </ul>
+                <p class="note"><span>NOTE:</span><br>Function.prototype.toString() returns a string representation of
+                    the source code of the function.</p>
+                <p>Unlike Call and Apply, Bind doesn't itself call the function, it can only be used to bind the value
+                    of context and other
+                    arguments before calling the function. Using Bind in one of the examples from above:</p>
+                <code>(function introduce(name, interest) {
+                console.log('Hi! I\'m '+ name +' and I like '+ interest +'.');
+                console.log('The value of this is '+ this +'.')
+                }).bind(window, 'Peach', 'Cosmology')();
+                
+                // logs:
+                // Hi! I'm Peach and I like Cosmology.
+                // The value of this is [object Window].</code>
+                <p>Bind is like the<code class="codee">call</code>function, it allows you pass the rest of the arguments
+                    one by one separated by a comma and not
+                    like <code class="codee">apply</code>, in which you pass the arguments in an array.</p>
+                <h2>Conclusion</h2>
+                <p>These concepts are radical to JavaScript and important to understand.</p>
+            </article>
+        </section>
+        <hr>
+
+        <!--   Section 2  -->
+        <section class="main-section" id="JavaScript_Hoisting">
+            <header><u>JS Hoisting</u></header>
+            <article>
+                <p>Hoisting in JavaScript is a behavior in which a function or a variable can be used before
+                    declaration.<br>
+                    Inevitably, this means that no matter where functions and variables are declared, they are moved to
+                    the top of their
+                    scope regardless of whether their scope is global or local.<br>
+
+                    Of note however, is the fact that the hoisting mechanism only moves the declaration. The assignments
+                    are left in place.</p>
+                <code>// using test before declaring
+                console.log(test); // undefined
+                var test;</code>
+                <p>The above program works and the output will be<code class="codee">undefined</code>. The above program
+                    behaves as</p>
+                <code>// using test before declaring
+                var test;
+                console.log(test); // undefined</code>
+                <p>Since the variable<code class="codee">test</code>is only declared and has no value,<code
+                        class="codee">undefined</code> value is assigned to it.</p>
+                <p class="note"><span>NOTE:</span><br>In hoisting, though it seems that the declaration has moved up in
+                    the program, the actual thing that happens is that the
+                    function and variable declarations are added to memory during the compile phase.</p>
+                <h2>Variable Hoisting</h2>
+                <p>In terms of variables and constants, keyword<code class="codee">var</code>is hoisted and<code
+                        class="codee">let</code>and<code class="codee">const</code>does not allow
+                    hoisting.<br>For example,</p>
+                <code>// program to display value
+                a = 5;
+                console.log(a);
+                var a; // 5</code>
+                <p>In the above example, variable<code class="codee">a</code>is used before declaring it. And the
+                    program works and displays the output<code class="codee">5</code>. The
+                    program behaves as:</p>
+                <code>// program to display value
+                var a;
+                a = 5;
+                console.log(a); // 5</code>
+                <p>However in JavaScript, initializations are not hoisted. For example,</p>
+                <code>// program to display value
+                console.log(a);
+                var a = 5; 
+                //Output
+                //undefined</code>
+                <p>The above program behaves as:</p>
+                <code>var a;
+                console.log(a);
+                a = 5;</code>
+                <p>Only the declaration is moved to the memory in the compile phase. Hence, the value of variable<code
+                        class="codee">a</code>is<code class="codee">undefined</code>because<code
+                        class="codee">a</code>is printed without initializing it.</p>
+                <p>Also, when the variable is used inside the function, the variable is hoisted only to the top of the
+                    function. For example,</p>
+                <code>// program to display value
+                var a = 4;
+                
+                function greet() {
+                b = 'hello';
+                console.log(b); // hello
+                var b;
+                }
+                
+                greet(); // hello
+                console.log(b);
+                //Output
+                //hello
+                //Uncaught ReferenceError: b is not defined</code>
+                <p>In the above example, variable<code class="codee">b</code>is hoisted to the top of the function <code
+                        class="codee">greet</code>and becomes a local
+                    variable. Hence<code class="codee">b</code>is
+                    only accessible inside the function.<code class="codee">b</code>does not become a global variable.
+                </p>
+                <p class="note"><span>NOTE:</span><br>In hoisting, the variable declaration is only accessible to the
+                    immediate scope.</p>
+                <p>If a variable is used with the let keyword, that variable is not hoisted. For example,</p>
+                <code>// program to display value
+                a = 5;
+                console.log(a);
+                let a; // error
+                //Output
+                //Uncaught ReferenceError: Cannot access 'a' before initialization</code>
+                <p>While using<code class="codee">let</code>, the variable must be declared first.</p>
+                <h2>Function Hoisting</h2>
+                <p>A function can be called before declaring it. For example,</p>
+                <code>// program to print the text
+                greet();
+                
+                function greet() {
+                console.log('Hi, there.');
+                }
+                //Output
+                //Hi, there</code>
+                <p>In the above program, the function<code class="codee">greet</code>is called before declaring it and
+                    the program shows the output.
+                    This is due to hoisting.</p>
+                <p>However, when a function is used as an <strong>expression</strong>, an error occurs because only
+                    declarations are hoisted. For example;</p>
+                <code>// program to print the text
+                greet();
+                
+                let greet = function() {
+                console.log('Hi, there.');
+                }
+                //Output
+                //Uncaught ReferenceError: greet is not defined</code>
+                <p>If<code class="codee">var</code>was used in the above program, the error would be:</p>
+                <code>Uncaught TypeError: greet is not a function</code>
+                <p class="note"><span>NOTE:</span><br>Generally, hoisting is not performed in other programming
+                    languages like Python, C, C++, Java.<br><br>
+                    Hoisting can cause undesirable outcomes in your program. And it is best to declare variables and
+                    functions first before
+                    using them and avoid hoisting.<br><br>
+                    In the case of variables, it is better to use let than var.</p>
+                <h3>Order of precedence</h3>
+                <p>When declaring JavaScript functions and variables:</p>
+                <ol>
+                    <li>Variable assignment takes precedence over function declaration</li>
+                    <li>Function declarations take precedence over variable declarations</li>
+                </ol>
+                <p class="note"><span>NOTE:</span><br>Function declarations are hoisted over variable declarations but
+                    not over variable assignments.</p>
+                <h4>Variable assignment over function declaration</h4>
+                <code>var double = 22;
+                
+                function double(num) {
+                return (num*2);
+                }
+                
+                console.log(typeof double); // Output: number</code>
+                <h4>Function declarations over variable declarations</h4>
+                <code>var double;
+                
+                function double(num) {
+                return (num*2);
+                }
+                
+                console.log(typeof double); // Output: function</code>
+                <p>Even if we reversed the position of the declarations, the JavaScript interpreter would still
+                    consider<code class="codee">double</code>a function.</p>
+                <h2>Hoisting classes</h2>
+                <p>JavaScript classes too can be loosely classified either as:</p>
+                <ol>
+                    <li>Class declarations</li>
+                    <li>Class expressions</li>
+                </ol>
+                <h3>Class declarations</h3>
+                <p>Much like their function counterparts, JavaScript class declarations are hoisted. However, they
+                    remain uninitialized until evaluation.<br>
+                    This effectively means that you have to declare a class before you can use it.</p>
+                <code>var Frodo = new Hobbit();
+                Frodo.height = 100;
+                Frodo.weight = 300;
+                console.log(Frodo); // Output: ReferenceError: Hobbit is not defined
+                
+                class Hobbit {
+                constructor(height, weight) {
+                this.height = height;
+                this.weight = weight;
+                }
+                }</code>
+                <p>I’m sure you’ve noticed that instead of getting an<code class="codee">undefined</code>we get a <code
+                        class="codee">Reference error</code>. That evidence
+                    lends claim to our
+                    position that class declarations are hoisted.<br><br>
+
+                    If you’re paying attention to your linter, it supplies us with a handy tip.</p>
+                <code>Hobbit was used before it is declared, which is illegal for class variables</code>
+                <p>So, as far as class declarations go, to access the class declaration, you have to declare first.</p>
+                <code>class Hobbit {
+                constructor(height, weight) {
+                this.height = height;
+                this.weight = weight;
+                }
+                }
+                
+                var Frodo = new Hobbit();
+                Frodo.height = 100;
+                Frodo.weight = 300;
+                console.log(Frodo); // Output: { height: 100, weight: 300 }</code>
+                <h3>Class expressions</h3>
+                <p>Much like their function counterparts, class expressions are not hoisted.<br><br>
+                    Here’s an example with the un-named or anonymous variant of the class expression.</p>
+                <code>var Square = new Polygon();
+                Square.height = 10;
+                Square.width = 10;
+                console.log(Square); // Output: TypeError: Polygon is not a constructor
+                
+                var Polygon = class {
+                constructor(height, width) {
+                this.height = height;
+                this.width = width;
+                }
+                };</code>
+                <p>Here’s an example with a named class expression.</p>
+                <code>var Square = new Polygon();
+                Square.height = 10;
+                Square.width = 10;
+                console.log(Square); // Output: TypeError: Polygon is not a constructor
+                
+                
+                var Polygon = class Polygon {
+                constructor(height, width) {
+                this.height = height;
+                this.width = width;
+                }
+                };</code>
+                <p>The correct way to do it is like this:</p>
+                <code>var Polygon = class Polygon {
+                constructor(height, width) {
+                this.height = height;
+                this.width = width;
+                }
+                };
+                
+                var Square = new Polygon();
+                Square.height = 10;
+                Square.width = 10;
+                console.log(Square);</code>
+                <h2>Conclusion</h2>
+                <p>JavaScript hoisting occurs during the creation phase of the execution context that moves the variable
+                    and function
+                    declarations to the top of the script.<br><br>
+                    The JavaScript engine hoists the variables declared using the<code class="codee">let</code>keyword,
+                    but it doesn’t initialize
+                    them as the
+                    variables declared with the<code class="codee">var</code>keyword.<br><br>
+                    Function expressions and arrow functions aren’t hoisted.</p>
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 3 -->
+        <section class="main-section" id="Primitive_vs_Reference">
+            <header><u>Primitive vs Reference Values</u></header>
+            <article>
+                <p>When you assign a variable a value, JavaScript engine (V8 perhaps, depends on your browser) must
+                    determine whether this
+                    value is a primitive value or reference value (which is a type of object).</p>
+                <h4>Primitive Values</h4>
+                <p> - Primitive Value is the data that is stored on the stack</p>
+                <p> - Primitive Value is stored directly the location that
+                    variable accesses</p>
+                <ul>
+                    <li>number</li>
+                    <li>string</li>
+                    <li>boolean</li>
+                    <li>undefined</li>
+                    <li>null</li>
+                    <li>symbol</li>
+                </ul>
+                <h4>Reference Values</h4>
+                <p> - Reference Value is an object, stored in the heap.</p>
+                <p> - Reference Value variable location is a pointer to a location
+                    in memory where the object is stored</p><br><br>
+                <p>&emsp;anything that is "typeof" "object"</p>
+                <ul>
+                    <li>objects</li>
+                    <li>arrays</li>
+                    <li>functions</li>
+                </ul>
+                <code>const age = 28 // primitive
+                const name = 'Tyler' // primitive
+                const loading = false // primitive
+                const user = undefined // primitive
+                const response = null // primitive
+                const counter = Symbol('counter') // primitive
+                
+                const user = { name: 'Tyler' } // reference
+                const friends = ['Jake', 'Mike'] // reference
+                const doThing = () =&gt; ({}) // reference</code>
+                <h3>Differences</h3>
+                <p>The main difference between primitive value and the reference value is primitive types are
+                    <strong>passed by
+                        value</strong>, meaning
+                    they’re <strong>copied</strong> each time their value is used. This means the original value isn’t
+                    affected if it is
+                    referenced in a
+                    function.<br><br>
+                    In other words, the variable that stores a primitive value is accessed by value, Object is passed by
+                    reference, meaning
+                    the object’s value is used through a reference and will be affected by a function if it is used,
+                    <strong>only</strong> object is the
+                    reference type.
+                </p><br><br>
+                <p>On the surface primitive values and reference values look the same, but under the hood they behave
+                    much differently.<br>The key difference can be seen in how they store their value in memory.</p>
+                <br><br>
+                <p>If you looked at the in-memory value of a <strong>primitive</strong>, you’d see the actual value
+                    itself (<code class="codee">28</code>, <code class="codee">'Tyler'</code>, <code
+                        class="codee">false</code>, etc).</p><br><br>
+                <p>If you looked at the in-memory value of a <strong>reference</strong> type, you’d see a memory address
+                    (or a “reference” to a spot in
+                    memory).</p>
+                <br><br>
+                <h2>Primitive Value</h2>
+                <p>When you assign a variable that stores a primitive value to another, the value stored in the variable
+                    is created and
+                    copied into the new variable. Let’s take a look at some examples.</p>
+                <code>
+                    //first, we’ll define a variable named x with the initialized value of 10:
+                    var a = 10;
+                    
+                    //Then we define another variable, which named y then assign it a value of x. 
+                    //Internally, JavaScript will create a copy of value x to the value of y.
+                    var y = x;
+                    
+                    //Finally, we assign y value to the new value of 13
+                    y = 13;
+                </code>
+                <p>So what do you think about the value x and y after all of these steps?</p>
+                <code>var x = 10;
+                var y = x;
+                y = 13;
+                
+                console.log(x); // 10
+                console.log(y); // 13</code>
+                <p>Because JavaScript engine just created a new <strong>copy</strong> of the value x then assign it to
+                    the y variable. x and y have <strong>no relationship</strong> to each other. So the initialized
+                    value of x remains intact.</p><br><br>
+                <p>Let's consider another example:</p>
+                <code>var primitiveValue = 10;
+                primitiveValue++;
+                function takeSomeValue(){
+                return primitiveValue * 10;
+                }
+                console.log(primitiveValue);
+                
+                //Output
+                //11
+            
+                </code>
+                <p>If you know that insides<code class="codee">takeSomeValue</code>function it’s just a copy of<code
+                        class="codee">primitiveValue</code>variable then multiply by 10, then
+                    you got the point, it will log out the value of 11.
+                </p>
+                <p>Because inside<code class="codee">console.log</code>we invoked<code
+                        class="codee">primitiveValue</code>which was increased
+                    by 1 after the postfix increment. We didn’t
+                    call<code class="codee">takeSomeValue</code>function, which just takes the copy of<code
+                        class="codee">primitiveValue</code>.</p>
+                <h2>Reference Value</h2>
+                <p><strong>Only object</strong> has data type as a <strong>reference value</strong>. When you assign a
+                    reference value from one variable to another, the
+                    value stored in the variable is also <em>copied into the location of the new variable.</em><br>The
+                    difference is that the values stored in both variables now are the address of the actual object
+                    stored in <strong>the heap</strong>.
+                    As a result, both variables are pointing to the same object.
+                </p>
+                <br><br>
+                <p>Let's consider another example:</p>
+                <code>
+                    //First, let’s create a variable named referenceObject that holds an object with name as its property 
+                    //and the value of it is Flop Flopian:
+                    var referenceObject = {
+                    name: "Flop Flopian"
+                    }
+                </code>
+                <p>To demonstrate the difference between reference values and primitive values by doing the same steps
+                    as we did with<code class="codee">primitiveValue</code>above. Assign value of<code
+                        class="codee">referenceObject</code>in
+                    this case is an object to the new variable,<code class="codee">anotherObject</code>:</p>
+                <code>var anotherObject = referenceObject;
+                    //Then, assign anotherObject property to the new cool name by using dot notation:
+
+                    anotherObject.name = "PuppyDoggy"
+                    //Then print out the name of referenceObject property:
+
+                    console.log(referenceObject.name);
+
+                    //Output
+                    //"PuppyDoggy"
+                </code>
+                <p>Because of both<code class="codee">referenceObject</code>and<code
+                        class="codee">anotherObject</code>are pointing to the same object, therefore, the change is also
+                    reflected if you access the object using the<code class="codee">referenceObject</code>variable. In
+                    this case, the name had been changed to
+                    “PuppyDoggy”.</p>
+                <br><br>
+                <p>Let’s take a look at some more examples.</p>
+                <code>let surname = 'McGinnis'
+                let displayName = surname
+                
+                surname = 'Anderson'
+                
+                console.log(surname) // 'Anderson'
+                console.log(displayName) // 'McGinnis'</code>
+                <p>First we create a variable called<code class="codee">surname</code>and assign the string<code
+                        class="codee">McGinnis</code>to
+                    it. Then we create a new variable called
+                    <code class="codee">displayName</code>and assign it to whatever the in-memory value of<code
+                        class="codee">surname</code>is,
+                    which happens to be<code class="codee">McGinnis</code>. From there we
+                    change the in-memory value of<code class="codee">surname</code>to be Anderson. Now, when we log<code
+                        class="codee">surname</code>we get<code class="codee">Anderson</code>and when we log
+                    <code class="codee">displayName</code>we get<code class="codee">McGinnis</code>.
+                    <br><br>Though this example
+                    demonstrates that the in-memory value of a
+                    primitive is the value
+                    itself, there’s nothing surprising or really interesting going on here.
+                </p>
+                <p>Let’s look at a similar example but instead of using a <strong>primitive value</strong>, let’s use a
+                    <strong>reference value</strong>.
+                </p>
+                <code>
+                    let leo = {
+                    type: 'Dog',
+                    name: 'Leo'
+                    }
+                    
+                    let snoop = leo
+                    
+                    snoop.name = 'Snoop'
+                    
+                    console.log(leo.name) // Snoop
+                    console.log(snoop.name) // Snoop
+                </code>
+                <p>First we create a variable called<code class="codee">leo</code>and assign it to an object which has
+                    two properties,<code class="codee">type</code>and<code class="codee">name</code>. Then we create
+                    a new variable called<code class="codee">snoop</code>and assign it to whatever the in-memory value
+                    of<code class="codee">leo</code>is, which is the reference to the spot
+                    in memory where the<code class="codee">leo</code>object is located. At this point, both<code
+                        class="codee">leo</code>and<code class="codee">snoop</code>are referencing the same spot in
+                    memory.
+                    What that means is when we modify<code class="codee">snoop.name</code>, because<code
+                        class="codee">snoop</code>and<code class="codee">leo</code>are referencing the same spot in
+                    memory, it’s as if
+                    we also modified<code class="codee">leo.name</code>. That’s why when we log<code
+                        class="codee">leo.name</code>and<code class="codee">snoop.name</code>we get the same value,<code
+                        class="codee">snoop</code>.</p>
+                <br><br>
+                <p>Let’s look at one more example to cement your understanding. What do you think happens when, using
+                    the identity operator
+                    (<code class="codee"> === </code>), we compare two primitives that have the same value?</p>
+                <code>
+                    const name = 'Tyler'
+                    const friend = 'Tyler'
+                    
+                    name === friend // true
+                </code>
+                <p>Here we see that because<code class="codee">name</code>and<code class="codee">friend</code>have the
+                    same value,<code class="codee">Tyler</code>, when comparing them, we get<code
+                        class="codee">true</code>. This probably
+                    seems obvious but it’s important to realize that the reason we get<code class="codee">true</code>is
+                    because, with the identity operator,
+                    primitives are compared by their <strong>value</strong>. Since both values equal<code
+                        class="codee">Tyler</code>, comparing them evaluates to<code class="codee">true</code>.</p>
+                <br><br>
+                <p>Now, what about reference values?</p>
+                <code>const leo = {
+                type: 'Dog',
+                name: 'Leo'
+                }
+                
+                const leito = {
+                type: 'Dog',
+                name: 'Leo'
+                }
+                
+                leo === leito // false</code>
+                <p>Even though<code class="codee">leo</code>and<code class="codee">leito</code>have the same properties
+                    and values, when comparing them with the identity operator, we get <code class="codee">false</code>.
+                    The reason for that is because, unlike primitive values, reference values are compared by their
+                    reference, or
+                    their location in memory. Above, even though<code class="codee">leo</code>and<code
+                        class="codee">leito</code>have the same properties and values, they’re occupying
+                    different locations in memory.</p>
+                <br><br>
+                <p>Both these examples demonstrate how primitive types are compared by their value while reference types
+                    are compared by
+                    their reference.</p>
+                <h2>Conclusion</h2>
+                <p class="note"><span>NOTE:</span><br>“All primitives are immutable, i.e., they cannot be altered. It is
+                    important not to confuse a primitive itself with a
+                    variable assigned a primitive value. The variable may be reassigned a new value, but the existing
+                    value can not be
+                    changed in the ways that objects, arrays, and functions can be altered.” - MDN</p>
+                <p>An interesting by-product of primitive values is that they’re always immutable. This make sense if
+                    you think of
+                    primitives in terms of their in-memory value.<br>We said earlier that <em>“if you looked at the
+                        in-memory value of a primitive,
+                        you’d see the actual value itself”</em>.<br><br>The reason primitive values are always immutable
+                    is
+                    because whenever you change a
+                    primitive value, what you’re actually doing is replacing the in-memory value. Because you can only
+                    replace the value and
+                    never modify it, by definition, that makes it immutable.</p>
+
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 4 -->
+        <section class="main-section" id="Type_Coercion">
+            <header><u>Type Coercion</u></header>
+            <article>
+                <p>In JavaScript, you can convert a value from one type to another. This is called type
+                    coercion.<br><br>Type
+                    coercion is the process of converting value from one type to another (such as string to number,
+                    object to boolean,
+                    and so on). Any type, be it primitive or an object, is a valid subject for type coercion.
+                    <br><br>
+                    JavaScript
+                    allows you to convert value of one type into another. This process of type conversion is called
+                    “type coercion”, when it
+                    is done implicitly. When it is done explicitly, it is called “type casting”. This process applies to
+                    primitive types
+                    such as number, string, boolean, null, undefined and Symbol. It also applies to objects.
+                    <br><br>
+                    Type coercion is one of the topics that can be hard to understand.
+                </p>
+                <h2>Implicit and explicit type coercion</h2>
+                <p>As you know, type coercion refers to implicit type conversion while type casting to explicit. When
+                    JavaScript developers
+                    talk about type coercion, they usually refer to both types, implicit and explicit. The main
+                    difference between these two
+                    is that one is usually done on purpose while the other automatically, by the language.</p>
+                <br><br>
+                <p>JavaScript as a programming language is weakly and dynamically typed. This means few things. Weakly
+                    means you don’t have
+                    to specify what type some value is before you can use it. For example, you don’t have to tell that a
+                    function requires
+                    string as a parameter or that some variable is, or will be, an integer.</p>
+                <h3>Implicit coercion</h3>
+                <p>One advantage, or disadvantage, of weakly typed languages is that it allows for implicit type
+                    coercion to happen. This
+                    usually happens in two situations. The first one is when you use some operator along with two or
+                    more different values.
+                    Here, JavaScript will take those values and convert them as needed to make that operation happen.
+                </p>
+                <br><br>
+                <p>For example, let’s say you try to add a string to a number. In this case, JavaScript will take the
+                    number, convert it to
+                    a string. After that, it will concatenate that converted number, now string, with the string you
+                    wanted to add.</p>
+                <code>// Implicit conversion of a number to string
+                13 + '14' // '1314'
+                123 + '' // '123
+                7 + ' roses' // '7 roses'</code>
+                <p>Another example can be when you try to compare a number with another number that is defined as a
+                    string. In this case,
+                    JavaScript will first convert that number defined as a string to a number. After that, it will
+                    convert the real number
+                    with the converted. The same happens if you try to multiply those numbers.</p>
+                <code>// Implicit conversion of a string to number
+                4 &lt; '5' // true 6 &gt; '15' // false
+                    95 * '15' // 1425</code>
+                <p>The second situation when implicit type coercion happens is when you use<code
+                        class="codee">if...else</code>statement or ternary operator. It
+                    doesn’t matter what you use as the condition. The result will always be a boolean, either<code
+                        class="codee">true</code>or<code class="codee">false</code>. This is also
+                    why it is important to remember what are falsy and truthy values in JavaScript.</p>
+                <code>// Implicit conversion and truthy and falsy values
+                
+                // Some truthy values
+                if (5) true // true
+                if ('test') true // true
+                if ({}) true // true
+                if ([]) true // true
+                
+                
+                // Some falsy values
+                '' ? true : false // false
+                if (!'') true // true
+                0 ? true : false // false
+                if (!0) true // true
+                null ? true : false // false
+                if (!null) true // true
+                NaN ? true : false // false
+                if (!NaN) // true</code>
+                <h2>Explicit coercion</h2>
+                <p>That was about implicit coercion. Now, let’s talk about explicit, or type casting. This will be
+                    quick. Explicit coercion
+                    happens when JavaScript developers decide to convert value from another using specific function. For
+                    example, you can
+                    use<code class="codee">Number()</code>function to convert some type to a number, or<code
+                        class="codee">String()</code>to a string.</p>
+                <code>// Using explicit coercion to convert types to a number
+                Number('55') // 55
+                Number('dwarf') // Nan
+                Number(false) // 0
+                Number(true) // 1
+                Number([]) // 1
+                Number({}) // NaN
+                Number(null) // 0
+                Number(undefined) // NaN
+                
+                // Use explicit coercion to convert types to a string
+                String(99) // '99'
+                String(true) // 'true'
+                String(false) // 'false'
+                String([]) // ''
+                String(['one', 'two']) // 'one,two'
+                String({}) // '[object Object]'
+                String(Infinity) // 'Infinity'
+                String(null) // 'null'
+                String(undefined) // 'undefined'</code>
+                <h2>Three types of type Coercion</h2>
+                <p>In JavaScript, there are only three types of type conversion. These conversion types are to number,
+                    to string and to
+                    boolean. Let’s take a look at each.</p>
+                <h3>Coercion to number</h3>
+                <p>Explicit conversion, or type casting, to a type of number is simple and can be done quickly. The
+                    easiest way to do this
+                    is by using the<code class="codee">Number()</code>function.<br><br>Implicit, or type coercion, is
+                    more
+                    tricky.<br><br>There are multiple ways in which it can
+                    be triggered. The first one are comparison operators, the<code class="codee">&lt;</code>,<code
+                        class="codee">&gt;</code>,<code class="codee">&lt;=</code>and<code class="codee">&gt;=</code>.
+                </p>
+                <br><br>
+                <p>When you use any of these operators JavaScript will automatically coerce the values you used with one
+                    of these operators
+                    to number. Implicit coercion to number will also happen when you use bitwise operators, the <code
+                        class="codee">|</code>,<code class="codee">&</code>,<code class="codee">^</code>
+                    and<code class="codee">~</code>. It will also
+                    happen if you use arithmetic operators, the <code class="codee"> -, +, / </code>and<code
+                        class="codee">%</code>.</p>
+                <br><br>
+                <p>One exception here is the binary<code class="codee">+</code>operator. This operator will not trigger
+                    coercion to number if any
+                    of the values is
+                    type of a string. What will happen instead is coercion to a string. Lastly, implicit coercion will
+                    happen if you use the
+                    loose equality operator<code class="codee"> == </code>. This also includes the loose not equal<code
+                        class="codee"> != </code>.</p>
+                <br><br>
+                <p>Another exception here. JavaScript will not do implicit coercion to a number if you use<code
+                        class="codee"> == </code>or<code class="codee"> != </code>and both values are
+                    strings. This probably makes sense, but it is still worth mentioning, just in case. One last thing
+                    about coercion to
+                    number. When you want to convert a string to a number, JavaScript will first remove any leading and
+                    trailing white
+                    space.</p>
+                <br><br>
+                <p>JavaScript will also remove any new line<code class="codee">(\n)</code>and tab<code
+                        class="codee">(\t)</code>characters in the string. If the remaining string doesn’t
+                    contain a valid number it will be coerced to NaN. Otherwise, it will be coerced into a number. If
+                    the remaining string
+                    will be empty it will be coerced to 0. This will also happen with<code class="codee">null</code>.
+                </p>
+                <code>// Implicit coercion to number
+                7 &gt; '10' // false =&gt; becomes: 7 &gt; 10
+                +'88' // becomes 88
+                65 != '56' // true, =&gt; becomes: 65 != 56
+                15 / null // infinity
+                false | 0 // 0
+                
+                
+                // Explicit coercion to number
+                Number('678') // 678
+                Number('13m') // NaN
+                Number(' 51 ') // 51
+                Number('-65.9') // -65.9
+                Number('\n') // 0
+                Number('\n13') // 13
+                Number('\t') // 0
+                Number('\t695') // 695
+                Number([]) // 0
+                Number(null) // 0
+                Number(undefined) // NaN</code>
+                <h3>Coercion to string</h3>
+                <p>Explicit coercion to a string is just as easy as coercion to a number. All you have to do is use<code
+                        class="codee">String()</code>function.
+                    Implicit coercion to a string is just as easy. When you want to trigger implicit coercion you have
+                    to use the binary<code class="codee">+</code>operator, along with at least one string.</p>
+                <code>// Implicit coercion to string
+                56 + ' words' // '56 words'
+                'number ' + 17 // 'number 17'
+                7 + ' dwarfs and ' + 1 + ' Snow White' // '7 dwarfs and 1 Snow White'
+                '' + 15 // '15'
+                
+                // Explicit coercion to string
+                String(true) // 'true'
+                String(false) // 'false'
+                String(15.5) // '15.5'
+                String(-650) // '-650'
+                String(Infinity) // 'Infinity'
+                String([]) // ''
+                String(['Jacket', 15]) // 'Jacket,15'
+                String(null) // 'null'
+                String(undefined) // 'undefined'
+                String({}) // '[object Object]'</code>
+                <p>Aside to the<code class="codee">String()</code>here is also<code
+                        class="codee">toString()</code>method. This method also allows you to coerce various types to
+                    strings.
+                    You can use this method with numbers, booleans, arrays, objects, dates and also Symbols. Don’t use
+                    it with<code class="codee">null</code>or
+                    <code class="codee">undefined</code>. If you want to use it to convert a number, or an object, you
+                    have to wrap it with parentheses to avoid syntax
+                    errors.
+                </p>
+                <p class="note"><span>NOTE:</span><br>For numbers you can also specify radix parameter. The method will
+                    then convert the number to the base according to the
+                    radix parameter and then into a string.</p>
+                <code>// Coercing types to string with toString() method
+                58.toString() // SyntaxError: Identifier directly after number
+                (58).toString() // '58'
+                true.toString() // 'true'
+                false.toString() // 'false'
+                ['JS', 'TS'].toString() // 'JS,TS'
+                undefined.toString() // TypeError: Cannot read property 'toString' of undefined
+                null.toString() // TypeError: Cannot read property 'toString' of null
+                ({name: 'Joe'}).toString() // '[object Object]'
+                Symbol('name').toString() // 'Symbol(name)'
+                
+                
+                // Using toString() with radix parameter
+                (15).toString(2) // '1111'
+                (15).toString(8) // '30'
+                (15).toString(16) // 'f'</code>
+                <h3>Coercion to boolean</h3>
+                <p>When you want to explicitly convert something in boolean you can do that with<code
+                        class="codee">Boolean()</code>function. Implicit coercion will
+                    happen in two situations. The first situations is a logical context. For example, inside the<code
+                        class="codee">if...else</code>statement. The
+                    second situation is when you use one of the logical operators, the<code
+                        class="codee">||,&&</code>or<code class="codee">!</code>.</p>
+                <code>// Implicit coercion to boolean
+                
+                if (0) {/* Do something */} // logical context
+                !!7 // true
+                99 || 'JS' // 99
+                !!0 // false (0 is falsy value)
+                !!'' // false (empty string is falsy value)
+                !!null // false (null is falsy value)
+                !!undefined // false (null is falsy value)
+                
+                // Explicit coercion to boolean
+                Boolean(15) // true
+                Boolean(-15) // true
+                Boolean('') // false
+                Boolean('Syntax') // true
+                Boolean(true) // true
+                Boolean(0) // false
+                Boolean(-0) // false
+                Boolean(Infinity) // true
+                Boolean(-Infinity) // true
+                Boolean(null) // false
+                Boolean(undefined) // false
+                Boolean(NaN) // false
+                Boolean([]) // true
+                Boolean({}) // true
+                Boolean(Symbol()) // true
+                Boolean(function() {}) // true</code>
+                <h2>Strict and loose equality</h2>
+                <p>One topic related to type coercion is equality.
+                    <br><br>In JavaScript, there are two types of eventuality. The first one is
+                    loose equality, either<code class="codee"> == </code>or<code class="codee"> != </code>. The second
+                    one is strict equality, either<code class="codee"> === </code>or<code class="codee"> !== </code>.
+                    The difference between those is
+                    that one allows for type coercion to happen while the other doesn’t.
+                </p>
+                <br><br>
+                <p>The first one, loose equality, is the one that allows for type coercion to happen. When you use loose
+                    equality to check
+                    if some values are equal, JavaScript will do two things. First, it will check if the two values are
+                    the same type. If
+                    not, it will coerce one into another. Then, it will check if those values are the same.</p>
+                <br><br>
+                <p>When you use strict equality, JavaScript will not try to coerce one value into another. Instead, it
+                    will do two checks.
+                    First, it will check if those values are the same. Second, it will check if their types are the
+                    same. Only if both
+                    conditions are true, the result will be<code class="codee">true</code>. Otherwise, the result will
+                    be<code class="codee">false</code>.</p>
+                <code>// Loose equality and coercion
+                0 == false // true (0 is falsy value) - coerced to false == false
+                0 == true // false - coerced to false == false
+                1 == true // true (1 is truthy value) - coerced to true == true
+                1 == false // false - coerced to true == false
+                '15' == 15 // true - coerced to '15' == '15'
+                15 == '15' // true - coerced to '15' == '15'
+                null == undefined // true - coerced to false == false
+                undefined == null // true - coerced to false == false
+                
+                
+                // Strict equality and coercion
+                0 === false // false - number is not a boolean
+                0 === true // false - number is not a boolean
+                1 === true // false - number is not a boolean
+                1 === false // false - number is not a boolean
+                '15' === 15 // false - string is not a number
+                15 === '15' // false - number is not a string
+                null === undefined // false - null is not undefined
+                undefined === null // false - undefined is not null</code>
+                <p class="note"><span>NOTE:</span><br>Loose equality can lead to results you might not expect. The best
+                    way to avoid this, and also to create more reliable
+                    equality checks, is to use strict equal. With strict equal, JavaScript will not be able to use type
+                    coercion. It will
+                    also always compare the types of values, instead of only the values.</p>
+                <h2>Conclusion</h2>
+                <p>Type coercion in JavaScript is one of the topics that can be tricky. It is also one of the topics
+                    every JavaScript
+                    developer has to learn and understand.</p>
+
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 5 -->
+        <section class="main-section" id="Recursion">
+            <header><u>Recursion</u></header>
+            <article>
+                <p><strong>Recursion</strong> is when a function calls itself until someone stops it. If no one stops it
+                    then it'll <strong>recurse</strong> (call itself)
+                    forever.</p>
+                <br><br>
+                <p>Recursive functions let you perform a unit of work multiple times. This is exactly what<code
+                        class="codee">for/while</code>loops let us
+                    accomplish! Sometimes, however, recursive solutions are a more elegant approach to solving a
+                    problem.</p>
+                <h2>Countdown Function</h2>
+                <p>Let's create a function that counts down from a given number. We'll use it like this.</p>
+                <code>countDownFrom(5);
+                // 5
+                // 4
+                // 3
+                // 2
+                // 1</code>
+                <p>And here's our algorithm to solve this problem.</p>
+                <ul>
+                    <li>Take one parameter called<code class="codee">number</code>. This is our starting point.</li>
+                    <li>Go from<code class="codee">number</code>down to<code class="codee">0</code>, logging each one
+                        along the way.</li>
+                </ul>
+                <p>We'll start with a<code class="codee">for</code>loop approach and then compare it to a recursive one.
+                </p>
+                <h3>Imperative approach (loops)</h3>
+                <code>function countDownFrom(number) {
+                for (let i = number; i &gt; 0; i--) {
+                console.log(i);
+                }
+                }
+                
+                countDownFrom(5);
+                // 5
+                // 4
+                // 3
+                // 2
+                // 1</code>
+                <p>This one contains both algorithmic steps.</p>
+                <ol>
+                    <li>Take one parameter called<code class="codee">number</code>.</li>
+                    <li>Log everything from<code class="codee">number</code>to<code class="codee">0</code>.</li>
+                </ol>
+                <h3>Recursive approach</h3>
+                <code>function countDownFrom(number) {
+                if (number === 0) {
+                return;
+                }
+                
+                console.log(number);
+                countDownFrom(number - 1);
+                }
+                
+                countDownFrom(5);
+                // 5
+                // 4
+                // 3
+                // 2
+                // 1</code>
+                <p>This one also passes.</p>
+                <ol>
+                    <li>Take one parameter called<code class="codee">number</code>.</li>
+                    <li>Log everything from<code class="codee">number</code>to<code class="codee">0</code>.</li>
+                </ol>
+                <p>So conceptually the two approaches are the same. However, they get the job done in different ways.
+                </p>
+                <h3>Debugging our imperative solution</h3>
+                <p>For a more visual example, let's put a<code class="codee">debugger</code>in our loop version and
+                    throw it into Chrome Developer Tools.</p>
+                <code>function countDownFrom(number) {
+                for (let i = number; i &gt; 0; i--) {
+                console.log(i);
+                debugger;
+                }
+                }</code>
+                <p>See how it uses an extra variable,<code class="codee">i</code>, to track the current number? As you
+                    iterate<code class="codee">i</code>decreases,
+                    eventually hitting<code class="codee">0</code>and
+                    terminating.<br><br>
+                    And in the<code class="codee">for</code>loop we specified "stop if<code
+                        class="codee">i &gt; 0</code>".</p>
+                <h3>Debugging our recursive solution</h3>
+                <code>function countDownFrom(number) {
+                if (number === 0) {
+                return;
+                }
+                
+                console.log(number);
+                
+                debugger;
+                
+                countDownFrom(number - 1);
+                }</code>
+                <p>The recursive version doesn't need extra variables to track its progress. Notice how the pile of
+                    functions (call stack)
+                    grows as we recurse?</p>
+                <br><br>
+                <p>That's because each call to<code class="codee">countDownFrom</code>adds to the stack, feeding it<code
+                        class="codee">number - 1</code>. By doing this we're we're passing
+                    along an updated<code class="codee">number</code>each time. No extra state needed!</p>
+                <br><br>
+                <p>That's main difference between the two approaches.</p>
+                <ol>
+                    <li>Iterative uses internal state (extra variables for counting, etc).</li>
+                    <li>Recursive does not, it simply passes updated parameters between each call.</li>
+                </ol>
+                <p>But how does either version know when to stop?</p>
+                <h2>Infinite Loops</h2>
+                <p>In your travels, you may have been warned about the dreaded infinite loop.</p>
+                <code>? THIS RUNS FOREVER, BE WARNED ?
+                while (true) { console.log('WHY DID YOU RUN THIS?!' }
+                
+                ? THIS RUNS FOREVER, BE WARNED ?
+                for (i = 0;;) { console.log('WHY DID YOU RUN THIS?!') }</code>
+                <p>Since they'd theoretically run forever, an infinite loop will halt your program and possibly crash
+                    your browser. You can
+                    prevent them by always coding a <em>stopping condition</em>.</p>
+                <code> This does not run forever
+                x = 0;
+                while (x &lt; 3) { 
+                    console.log(x); x++; 
+                } 
+                
+                This does not run forever 
+                for (x=0; x &lt; 3; x++) {
+                    console.log(x); 
+                }</code>
+                <p>In both cases we log<code class="codee">x</code>, increment it, and stop when it becomes<code
+                        class="codee">3</code>. Our<code class="codee">countDownFrom</code>function had similar logic.
+                </p>
+                <code>// Stop at 0
+                for (let i = number; i &gt; 0; i--)</code>
+                <p>Again, loops need extra state to determine when they should stop. That's what<code
+                        class="codee">x</code>and<code class="codee">i</code>are for.</p>
+                <h2>Infinite Recursion</h2>
+                <p>Recursion also presents the same danger. It's not hard to write a self-referencing function that'll
+                    crash your browser.</p>
+                <code>?THIS RUNS FOREVER, BE WARNED?
+                function run() {
+                console.log('running');
+                run();
+                }
+                
+                run();
+                // running
+                // running
+                // ...</code>
+                <p>Without a stopping condition,<code class="codee">run</code>will forever call itself. You can fix that
+                    with an<code class="codee">if</code>statement.</p>
+                <code>This does not run forever
+                
+                function run(x) {
+                if (x === 3) return;
+                
+                console.log('running');
+                run(x + 1);
+                }
+                
+                run(0);
+                // running
+                // running
+                // running
+                
+                // x is 3 now, we're done.</code>
+                <h3>Base Case</h3>
+                <p>This is known as the base case–our recursive<code class="codee">countDownFrom</code>had one.</p>
+                <code>if (number === 0) {
+                return;
+                }</code>
+                <p>It's the same idea as our loop's stopping logic. Whichever approach you pick, always remember that at
+                    some point it
+                    needs to be stopped.</p>
+                <h2>Conclusion</h2>
+                <p> - Recursion is when a function calls itself until someone stops it.<br><br> - It can be used instead
+                    of a
+                    loop.<br><br> - If no one stops it, it'll recurse forever and crash your program.<br><br> - A base
+                    case is
+                    a condition that stops the recursion. Don't forget to add them!<br><br> - Loops use extra state
+                    variables for tracking and counting, while recursion only uses the provided parameters.</p>
+
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 6 -->
+        <section class="main-section" id="Closures">
+            <header><u>Closures</u></header>
+            <article>
+                <p>Closures are a notoriously difficult to grasp. But they are vital to advancing as a JavaScript
+                    developer.</p>
+                <br><br>
+                <p>Whenever you create a function within another function, you have created a closure. The inner
+                    function is the closure.
+                    This closure is usually returned so you can use the outer function’s variables at a later time.</p>
+                <code>function outerFunction () {
+                const outer = `I see the outer variable!`
+                
+                function innerFunction() {
+                console.log(outer)
+                }
+                
+                return innerFunction
+                }
+                
+                outerFunction()() // I see the outer variable!</code>
+                <p>Since the inner function is returned, you can also shorten the code a little by writing a return
+                    statement while
+                    declaring the function.</p>
+                <code>function outerFunction () {
+                const outer = `I see the outer variable!`
+                
+                return function innerFunction() {
+                console.log(outer)
+                }
+                }
+                
+                outerFunction()() // I see the outer variable!</code>
+                <p>Since closures have access to the variables in the outer function, they are usually used for two
+                    things:</p>
+                <ol>
+                    <li>To control side effects</li>
+                    <li>To create private variables</li>
+                </ol>
+                <h3>Controlling side effects with closures</h3>
+                <p>Side effects happen when you do something in aside from returning a value from a function. Many
+                    things can be side
+                    effects, like an Ajax request, a timeout or even a<code class="codee">console.log</code>statement:
+                </p>
+                <code>function (x) {
+                console.log('A console.log is a side effect!')
+                }</code>
+                <p>When you use closures to control side effects, you’re usually concerned with ones that can mess up
+                    your code flow like
+                    Ajax or timeouts.<br><br>Let’s go through this with an example to make things clearer.<br><br>Let’s
+                    say you want to make a cake for your friend’s birthday. This cake would take a second to make, so
+                    you wrote a
+                    function that logs<code class="codee">Made a cake</code>after one second.</p>
+                <code>function makeCake() {
+                setTimeout(_ =&gt; console.log(`Made a cake`), 1000)
+                }</code>
+                <p>As you can see, this cake making function has a side effect: a timeout.</p>
+                <br><br>
+                <p>Let’s further say you want your friend to choose a flavor for the cake. To do so, you can write add a
+                    flavor to your
+                    <code class="codee">makeCake</code>function.
+                </p>
+                <code>function makeCake(flavor) {
+                setTimeout(_ =&gt; console.log(`Made a ${flavor} cake!`), 1000)
+                }</code>
+                <p>When you run the function, notice the cake gets made immediately after one second.</p>
+                <code>makeCake('banana')
+                // Made a banana cake!</code>
+                <p>The problem here is that you don’t want to make the cake immediately after knowing the flavor. You
+                    want to make it later
+                    when the time is right.</p>
+                <br><br>
+                <p>To solve this problem, you can write a<code class="codee">prepareCake</code>function that stores your
+                    flavor. Then, return the<code class="codee">makeCake</code>closure
+                    within<code class="codee">prepareCake</code>.</p>
+                <br><br>
+                <p>From this point on, you can call the returned function whenever you want to, and the cake will be
+                    made within a second.</p>
+                <code>function prepareCake (flavor) {
+                return function () {
+                setTimeout(_ =&gt; console.log(`Made a ${flavor} cake!`), 1000)
+                }
+                }
+                
+                const makeCakeLater = prepareCake('banana')
+                
+                // And later in your code...
+                makeCakeLater()
+                // Made a banana cake!</code>
+                <p>That’s how closures are used to reduce side effects – you create a function that activates the inner
+                    closure at your
+                    whim.</p>
+                <h3>Private variables with closures</h3>
+                <p>As you know by now, variables created in a function cannot be accessed outside the function. Since
+                    they can’t be
+                    accessed, they are also called private variables.</p>
+                <p>However, sometimes you need to access such a private variable. You can do so with the help of
+                    closures.</p>
+                <code>function secret (secretCode) {
+                return {
+                saySecretCode () {
+                console.log(secretCode)
+                }
+                }
+                }
+                
+                const theSecret = secret('CSS Tricks is amazing')
+                theSecret.saySecretCode()
+                // 'CSS Tricks is amazing'</code>
+                <p><code class="codee">saySecretCode</code>in this example above is the only function (a closure) that
+                    exposes the<code class="codee">secretCode</code>outside the original
+                    secret function. As such, it is also called a <strong>privileged function</strong>.</p>
+                <h2>Debugging scopes with DevTools</h2>
+                <p>Chrome and Firefox’s DevTools make it simple for you to debug variables you can access in the current
+                    scope. There are
+                    two ways to use this functionality.</p>
+                <br><br>
+                <p>The first way is to add the<code class="codee">debugger</code>keyword in your code. This causes
+                    JavaScript execution in browsers to pause so you
+                    can debug.</p>
+                <br><br>
+                <p>Here’s an example with the<code class="codee">prepareCake</code>:</p>
+                <code>function prepareCake (flavor) {
+                // Adding debugger
+                debugger
+                return function () {
+                setTimeout(_ =&gt; console.log(`Made a ${flavor} cake!`), 1000)
+                }
+                }
+                
+                const makeCakeLater = prepareCake('banana')</code>
+                <p>If you open your DevTools and navigate to the Sources tab in Chrome (or Debugger tab in Firefox), you
+                    would see the
+                    variables available to you.</p>
+                <br><br>
+                <p>You can also shift the<code class="codee">debugger</code>keyword into the closure. Notice how the
+                    scope variables changes this time:</p>
+                <code>function prepareCake (flavor) {
+                return function () {
+                // Adding debugger
+                debugger
+                setTimeout(_ =&gt; console.log(`Made a ${flavor} cake!`), 1000)
+                }
+                }
+                
+                const makeCakeLater = prepareCake('banana')</code>
+                <p>The second way to use this debugging functionality is to add a breakpoint to your code directly in
+                    the sources (or
+                    debugger) tab by clicking on the line number.</p>
+                <h3>Application of Closures in JavaScript</h3>
+                <p>Most of us use Closures while coding but we don’t get why we are using it. JavaScript doesn’t have
+                    the access modifiers
+                    like <strong>private, public, protected</strong> like other Object Oriented Programming Languages.
+                    So, we have to use functions to
+                    protect the namespace from the outside code usage in ES5.</p>
+                <br><br>
+                <p>Especially in functions, <strong>Immediately-invoked Function Expression (IIFE)</strong> is the one
+                    which is executed immediately after
+                    the declaration. You don’t need to invoke the function after the function is declared.</p>
+                <br><br>
+                <p>IIFE enables to write <strong>Module Pattern</strong> (one of the Design Pattern) in JavaScript.</p>
+                <p>Syntax definition of IIFE is:</p>
+                <code>(function(){
+                //variables & scope that inside the function
+                })();</code>
+                <p>Let’s have an example:</p>
+                <code>var studentEnrollment = (function () {
+                //private variables which no one can change
+                //except the function declared below.
+                var count = 0;
+                var prefix = "S";
+                // returning a named function expression
+                function innerFunc() {
+                count = count + 1;
+                return prefix + count;
+                };
+                return innerFunc;
+                })();
+                var x = studentEnrollment(); // S1
+                console.log(x);
+                var y = studentEnrollment(); // S2
+                console.log(y);</code>
+                <p>count & prefix are the 2 private variables which can’t be changed by anyone & can only be accessible
+                    to the inner
+                    function (here its innerFunc). This access is possible only by the feature called Closure.</p>
+                <ul>
+                    <li>At the first time, when the studentEnrollment function is called, the count variable inside the
+                        function is incremented
+                        1 by innerFunc function.</li>
+                    <li>At the second time, the count is incremented the previous value of count which is 1 to 2</li>
+                    <li>These are possible by the Closure feature.</li>
+                </ul>
+                <h2>Benefits of Closures</h2>
+                <p>Closures can level up your developer game. Here's a few practical uses.</p>
+                <h3>Data Privacy</h3>
+                <p>Data privacy is essential for safely sharing code.
+                    <br><br>
+                    Without it, anyone using your function/library/framework can maliciously manipulate its inner
+                    variables.
+                </p>
+                <h4>A bank with no privacy</h4>
+                <p>Consider this code that manages a bank account. The<code class="codee">accountBalance</code>is
+                    exposed globally!</p>
+                <code>let accountBalance = 0;
+                const manageBankAccount = function() {
+                return {
+                deposit: function(amount) {
+                accountBalance += amount;
+                },
+                withdraw: function(amount) {
+                // ... safety logic
+                accountBalance -= amount;
+                }
+                };
+                }</code>
+                <p>What's stopping me from inflating my balance or ruining someone else's?</p>
+                <code>// later in the script...
+                
+                accountBalance = 'Whatever I want, muhahaha &gt;:)';</code>
+                <p>Languages like Java and C++ allow classes to have private fields. These fields cannot be accessed
+                    outside the class, enabling perfect privacy.</p>
+                <br><br>
+                <p>JavaScript doesn't support private variables (yet), but we can use closures!</p>
+                <h4>A bank with proper privacy</h4>
+                <p>This time<code class="codee">accountBalance</code>sits <em>inside</em> our manager.</p>
+                <code>const manageBankAccount = function(initialBalance) {
+                let accountBalance = initialBalance;
+                
+                return {
+                getBalance: function() { return accountBalance; },
+                deposit: function(amount) { accountBalance += amount; },
+                withdraw: function(amount) {
+                if (amount &gt; accountBalance) {
+                return 'You cannot draw that much!';
+                }
+                
+                accountBalance -= amount;
+                }
+                };
+                }</code>
+                <p>And perhaps use it like so...</p>
+                <code>const accountManager = manageBankAccount(0);
+                
+                accountManager.deposit(1000);
+                accountManager.withdraw(500);
+                accountManager.getBalance(); // 500</code>
+                <p>Notice I can't directly access<code class="codee">accountBalance</code>anymore. I can only view it
+                    through<code class="codee">getBalance</code>, and change it via<code
+                        class="codee">deposit</code>and<code class="codee">withdraw</code>.</p>
+                <br><br>
+                <p>How's this possible? Closures!</p>
+                <br><br>
+                <p>Even though<code class="codee">manageBankAccount</code>created the<code
+                        class="codee">accountBalance</code>variable, the three functions it returns all have access
+                    to<code class="codee">accountBalance</code>via closure.</p>
+                <h3>Currying</h3>
+                <p>It's when a function takes its arguments one at a time.
+                    <br><br>
+                    So instead of this...
+                </p>
+                <code>const add = function(x, y) {
+                return x + y;
+                }
+                
+                add(2, 4); // 6</code>
+                <p>You can curry<code class="codee">add</code>by leveraging closures...</p>
+                <code>const add = function(x) {
+                return function(y) {
+                return x + y;
+                }
+                }</code>
+                <p>And you know that the returned function has access to<code class="codee">x</code>and<code
+                        class="codee">y</code>, so you could do something like this...</p>
+                <code>const add10 = add(10);
+                
+                add10(10); // 20
+                add10(20); // 30
+                add10(30); // 40</code>
+                <p>Currying's great if you'd like to "preload" a function's arguments for easier reuse. Again, only
+                    possible through
+                    JavaScript closures!</p>
+                <h3>React Developers Use Closures</h3>
+                <p>If you've kept up with React news, you heard that they released hooks last year. The most confusing
+                    hook,<code class="codee">useEffect</code>,
+                    relies on closures.</p>
+                <p>Here's the important part...</p>
+                <code>function App() {
+                const username = 'sarah';
+                
+                React.useEffect(function() {
+                fetch(`https://api.github.com/users/${username}`)
+                .then(res =&gt; res.json())
+                .then(user =&gt; console.log(user));
+                });
+                
+                // blah blah blah
+                }</code>
+                <p>Change<code class="codee">username</code>in the code, notice that it will fetch that username and log
+                    the output to the console.
+                    <br><br>
+                    This is closures once again.<code class="codee">username</code>is defined inside the outer function,
+                    but <code class="codee">useEffect</code>'s inner function actually uses
+                    it.
+                </p>
+                <h2>Conclusion</h2>
+                <p>The Closure is a collection of variables in an outer function which gives access to the inner
+                    function scope to protect
+                    the global namespace.
+                    <br><br>
+                    Closures enable developers to write clean code like OOP Languages which doesn’t confuse the global &
+                    local variable
+                    names in ES5 version.
+                </p>
+
+
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 7 -->
+        <section class="main-section" id="Asynchronous_Code">
+            <header><u>Asynchronous Code</u></header>
+            <article>
+                <p>Well it turns out that understanding asynchronous functions requires a great deal of knowledge about
+                    how JavaScript
+                    works fundamentally.</p>
+                <h2>What is asynchronous code?</h2>
+                <p>By design, JavaScript is a synchronous programming language. This means that when code is executed,
+                    JavaScript starts at the top of
+                    the file and runs through code line by line, until it is done.</p>
+                <br><br>
+                <p>The result of this design decision is that only one thing can happen at any one time.</p>
+                <br><br>
+                <p>You can think of this as if you were juggling six small balls. While you are juggling, your hands are
+                    occupied and can't
+                    handle anything else.</p>
+                <br><br>
+                <p>It's the same with JavaScript: once the code is running, it has its hands full with that code. We
+                    call this this kind of
+                    synchronous code blocking. Because it's effectively blocking other code from running.</p>
+                <br><br>
+                <p>Let's circle back to the juggling example. What would happen if you wanted to add another ball?
+                    Instead of six balls,
+                    you wanted to juggle seven balls. That's might be a problem.</p>
+                <br><br>
+                <p>You don't want to stop juggling, because it's just so much fun. But you can't go and get another ball
+                    either, because
+                    that would mean you'd have to stop.</p>
+                <br><br>
+                <p>The solution? Delegate the work to a friend or family member. They aren't juggling, so they can go
+                    and get the ball for
+                    you, then toss it into your juggling at a time when your hand is free and you are ready to add
+                    another ball mid-juggle.</p>
+                <br><br>
+                <p>This is what asynchronous code is. JavaScript is delegating the work to something else, then going
+                    about it's own
+                    business. Then when it's ready, it will receive the results back from the work.</p>
+                <h2>Who is doing the other work?</h2>
+                <p>Alright, so we know that JavaScript is synchronous and lazy. It doesn't want to do all of the work
+                    itself, so it farms
+                    it out to something else.</p>
+                <br><br>
+                <p>But who is this mysterious entity that works for JavaScript? And how does it get hired to work for
+                    JavaScript?</p>
+                <br><br>
+                <p>Well, let's take a look at an example of asynchronous code.</p>
+                <code>const logName = () =&gt; {
+                console.log("Han")
+                }
+                
+                setTimeout(logName, 0)
+                
+                console.log("Hi there")
+
+                //Output
+                // in console
+                Hi there
+                Han
+                </code>
+                <p>It turns out that the way we farm out work in JavaScript is to use environment-specific functions and
+                    APIs. And this is
+                    a source of great confusion in JavaScript.</p>
+                <br>
+                <p><strong>JavaScript always runs in an environment.</strong> Often, that environment is the browser.
+                    But
+                    it can also be on the server with NodeJS. But what on earth is the
+                    difference?</p>
+                <br>
+                <p>The difference – and this is important – is that the browser and the server (NodeJS),
+                    functionality-wise, are not
+                    equivalent. They are often similar, but they are not the same.</p>
+                <br>
+                <p>Let's illustrate this with an example. Let's say JavaScript is the protagonist of an epic fantasy
+                    book. Just an ordinary
+                    farm kid.</p>
+                <br>
+                <p>Now let's say that this farm kid found two suits of special armor that gave them powers beyond their
+                    own.</p>
+                <br>
+                <p>When they used the browser suit of armor, they gained access to a certain set of capabilities.When
+                    they used the server suit of armor they gained access to another set of capabilities.</p>
+                <br>
+                <p>These suits have some overlap, because the creators of these suits had the same needs in certain
+                    places, but not in
+                    others.</p>
+                <br>
+                <p>This is what an environment is. A place where code is run, where there exist tools that are built on
+                    top of the existing
+                    JavaScript language. They are not a part of the language, but the line is often blurred because we
+                    use these tools every
+                    day when we write code.</p>
+                <br>
+                <p>setTimeout, fetch, and DOM are all examples of Web APIs. They are tools
+                    that are built into the browser, and that are made available to us when our code is run.</p>
+                <br>
+                <p>And because we always run JavaScript in an environment, it seems like these are part of the language.
+                    But they are no</p>
+                <br>
+                <p>So if you've ever wondered why you can use fetch in JavaScript when you run it in the browser (but
+                    need to install a
+                    package when you run it in NodeJS), this is why. Someone thought fetch was a good idea, and built it
+                    as a tool for the
+                    NodeJS environment.</p>
+                <br>
+                <p>It turns out that it is the environment that takes on the work, and the way to get the environment to
+                    do that work, is
+                    to use functionality that belongs to the environment. For example fetch or setTimeout in the browser
+                    environment.</p>
+                <h2>What happens to the work?</h2>
+                <p>The environment takes on the work. Then what?</p>
+                <br>
+                <p>At some point you need to get the results back. But let's think about how this would work.
+                    <br><br>
+                    Let's go back to the juggling example from the beginning. Imagine you asked for a new ball, and a
+                    friend just started
+                    throwing the ball at you when you weren't ready.
+                    <br><br>
+                    That would be a disaster. Maybe you could get lucky and catch it and get it into your routine
+                    effectively. But theres a
+                    large chance that it may cause you to drop all of your balls and crash your routine. Wouldn't it be
+                    better if you gave
+                    strict instructions on when to receive the ball?
+                    <br><br>
+                    As it turns out, there are strict rules surrounding when JavaScript can receive delegated work.
+                    <br><br>
+                    Those rules are governed by the event loop and involve the microtask and macrotask queue.
+                </p>
+                <br><br>
+                <p>So when we delegate asynchronous code to the browser, the browser takes and runs the code and takes
+                    on that workload. <br><br>
+                    But there may be multiple tasks that are given to the browser, so we need to make sure that we can
+                    prioritize these
+                    tasks. <br><br>
+
+                    This is where the microtask queue and the macrotask queue come in play. The browser will take the
+                    work, do it, then
+                    place the result in one of the two queues based on the type of work it receives. <br>
+
+                    <strong>Promises</strong>, for example, are placed in the microtask queue and have a <strong>higher
+                        priority</strong>. <br><br>
+
+                    <strong>Events and setTimeout</strong> are examples of work that is put in the macrotask queue, and
+                    have a <strong>lower priority</strong>. <br><br>
+
+                    Now once the work is done, and is placed in one of the two queues, the event loop will run back and
+                    forth and check
+                    whether or not JavaScript is ready to receive the results. <br><br>
+
+                    Only when JavaScript is done running all its synchronous code, and is good and ready, will the event
+                    loop start picking
+                    from the queues and handing the functions back to JavaScript to run.
+                </p>
+                <br><br>
+                <p>So let's take a look at an example:</p>
+                <code>setTimeout(() =&gt; console.log("hello"), 0)
+                
+                fetch("https://someapi/data").then(response =&gt; response.json())
+                .then(data =&gt; console.log(data))
+                
+                console.log("What soup?")</code>
+                <p>What will the order be here?</p>
+                <ol>
+                    <li>Firstly, setTimeout is delegated to the browser, which does the work and puts the resulting
+                        function in the macrotask
+                        queue.</li>
+                    <li>Secondly fetch is delegated to the browser, which takes the work. It retrieves the data from the
+                        endpoint and puts the
+                        resulting functions in the microtask queue.</li>
+                    <li>Javascript logs out "What soup"?</li>
+                    <li>The event loop checks whether or not JavaScript is ready to receive the results from the queued
+                        work.</li>
+                    <li>When the console.log is done, JavaScript is ready. The event loop picks queued functions from
+                        the microtask queue, which
+                        has a higher priority, and gives them back to JavaScript to execute.</li>
+                    <li>After the microtask queue is empty, the setTimeout callback is taken out of the macrotask queue
+                        and given back to
+                        JavaScript to execute.</li>
+                </ol>
+                <code>In console:
+                // What soup?
+                // the data from the api
+                // hello</code>
+                <h2>Promises</h2>
+                <p>A promise is a JavaScript construct that represents a future unknown value. Conceptually, a promise
+                    is just JavaScript
+                    promising to return a value. <br> It could be the result from an API call, or it could be an error
+                    object from a failed
+                    network request. You're guaranteed to get something.</p>
+                <code>const promise = new Promise((resolve, reject) =&gt; {
+                // Make a network request
+                if (response.status === 200) {
+                resolve(response.body)
+                } else {
+                const error = { ... }
+                reject(error)
+                }
+                })
+                
+                promise.then(res =&gt; {
+                console.log(res)
+                }).catch(err =&gt; {
+                console.log(err)
+                })</code>
+                <p>A promise can have the following states:</p>
+                <ul>
+                    <li>fulfilled - action successfully completed</li>
+                    <li>rejected - action failed</li>
+                    <li>pending - neither action has been completed</li>
+                    <li>settled - has been fulfilled or rejected</li>
+                </ul>
+                <p>A promise receives a resolve and a reject function that can be called to trigger one of these states.
+                    <br>
+                    One of the big selling points of promises is that we can chain functions that we want to happen on
+                    success (resolve) or
+                    failure (reject):
+                </p>
+                <ul>
+                    <li>To register a function to run on success we use .then</li>
+                    <li>To register a function to run on failure we use .catch</li>
+                </ul>
+                <code>// Fetch returns a promise
+                fetch("https://swapi.dev/api/people/1")
+                .then((res) =&gt; console.log("This function is run when the request succeeds", res)
+                .catch(err =&gt; console.log("This function is run when the request fails", err)
+                
+                // Chaining multiple functions
+                fetch("https://swapi.dev/api/people/1")
+                .then((res) =&gt; doSomethingWithResult(res))
+                .then((finalResult) =&gt; console.log(finalResult))
+                .catch((err =&gt; doSomethingWithErr(err))</code>
+                <p>Now let's take a closer look at what this looks like under the hood, using fetch as an example:</p>
+                <code>const fetch = (url, options) =&gt; {
+                // simplified
+                return new Promise((resolve, reject) =&gt; {
+                
+                const xhr = new XMLHttpRequest()
+                // ... make request
+                xhr.onload = () =&gt; {
+                const options = {
+                status: xhr.status,
+                statusText: xhr.statusText
+                ...
+                }
+                
+                resolve(new Response(xhr.response, options))
+                }
+                
+                xhr.onerror = () =&gt; {
+                reject(new TypeError("Request failed"))
+                }
+                }
+                
+                fetch("https://swapi.dev/api/people/1")
+                // Register handleResponse to run when promise resolves
+                .then(handleResponse)
+                .catch(handleError)
+                
+                // conceptually, the promise looks like this now:
+                // { status: "pending", onsuccess: [handleResponse], onfailure: [handleError] }
+                
+                const handleResponse = (response) =&gt; {
+                // handleResponse will automatically receive the response, ¨
+                // because the promise resolves with a value and automatically injects into the function
+                console.log(response)
+                }
+                
+                const handleError = (response) =&gt; {
+                // handleError will automatically receive the error, ¨
+                // because the promise resolves with a value and automatically injects into the function
+                console.log(response)
+                }
+                
+                // the promise will either resolve or reject causing it to run all of the registered functions in the respective arrays
+                // injecting the value. Let's inspect the happy path:
+                
+                // 1. XHR event listener fires
+                // 2. If the request was successful, the onload event listener triggers
+                // 3. The onload fires the resolve(VALUE) function with given value
+                // 4. Resolve triggers and schedules the functions registered with .then</code>
+                <p>So we can use promises to do asynchronous work, and to be sure that we can handle any result from
+                    those promises. That
+                    is the value proposition.</p>
+                <br>
+                <p>When we use promises, we chain our functions onto the promise to handle the different scenarios.
+                    <br>
+                    This works, but we still need to handle our logic inside callbacks (nested functions) once we get
+                    our results back. What
+                    if we could use promises but write synchronous looking code? It turns out we can.
+                </p>
+                <h2>Async/Await</h2>
+                <p>Async/Await is a way of writing promises that allows us to write <em>asynchronous code in a
+                        synchronous way</em>. Let's have a look.</p>
+                <code>const getData = async () =&gt; {
+                const response = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+                const data = await response.json()
+                
+                console.log(data)
+                }
+                
+                getData()</code>
+                <p>Nothing has changed under the hood here. We are still using promises to fetch data, but now it looks
+                    synchronous, and we
+                    no longer have .then and .catch blocks. <br><br>
+
+                    Async / Await is actually just syntactic sugar providing a way to create code that is easier to
+                    reason about, without
+                    changing the underlying dynamic. <br><br>
+
+                    Let's take a look at how it works. <br><br>
+
+                    Async/Await lets us use generators to pause the execution of a function. When we are using async /
+                    await we are not
+                    blocking because the function is yielding the control back over to the main program. <br><br>
+
+                    Then when the promise resolves we are using the generator to yield control back to the asynchronous
+                    function with the
+                    value from the resolved promise. <br><br>We can now write asynchronous code that looks like
+                    synchronous
+                    code. Which means that it is easier to reason about, and
+                    we can use synchronous tools for error handling such as try / catch:
+                </p>
+                <code>const getData = async () =&gt; {
+                    try {
+                    const response = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+                    const data = await response.json()
+                    console.log(data)
+                    } catch (err) {
+                    console.log(err)
+                    }
+                    
+                    }
+                    
+                    getData()</code>
+                <p>In order to use async / await we need to prepend the function with async. This does not make it an
+                    asynchronous
+                    function, it merely allows us to use await inside of it.
+                    <br><br>
+                    Failing to provide the async keyword will result in a syntax error when trying to use await inside a
+                    regular function.
+                </p>
+                <code>const getData = async () =&gt; {
+                console.log("We can use await in this function")
+                }</code>
+                <p>Because of this, we can not use async / await on top level code. But async and await are still just
+                    syntactic sugar over
+                    promises. So we can handle top level cases with promise chaining:</p>
+                <code>async function getData() {
+                let response = await fetch('http://apiurl.com');
+                }
+                
+                // getData is a promise
+                getData().then(res =&gt; console.log(res)).catch(err =&gt; console.log(err);</code>
+                <p>This exposes another interesting fact about async / await. When defining a function as async, <em>it
+                        will always return a promise</em>.
+                    <br><br>
+                    Using async / await can seem like magic at first. But like any magic, it's just sufficiently
+                    advanced technology that
+                    has evolved over the years.
+                </p>
+                <h2>Conclusion</h2>
+                <p>You just added a key piece of knowledge about JavaScript and how it works with its environments to
+                    your toolbox.</p>
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 8 -->
+        <section class="main-section" id="this_keyword">
+            <header><u>The “this” Keyword</u></header>
+            <article>
+                <p>JavaScript's<code class="codee">this</code>keyword is one of the hardest aspects of the language to
+                    grasp. But it is critically important for
+                    writing more advanced JavaScript code.</p>
+                <br><br>
+                <p>In JavaScript, the<code class="codee">this</code>keyword allows us to:</p>
+                <ul>
+                    <li>Reuse functions in different execution contexts. It means, a function once defined can be
+                        invoked for different objects
+                        using the<code class="codee">this</code>keyword.</li>
+                    <li>Identifying the object in the current execution context when we invoke a method.</li>
+                </ul>
+                <p>The<code class="codee">this</code>keyword is very closely associated with JavaScript functions. When
+                    it comes to<code class="codee">this</code>, the fundamental thing is
+                    to understand where a function is invoked. Because we don't know what is in the<code
+                        class="codee">this</code>keyword until the function is
+                    invoked.
+                    <br><br>
+                    To understand what<code class="codee">this</code>truly means in JavaScript, let's take a look at a
+                    very similar concept in the English Language:
+                    Polysemy.
+                    <br><br>
+                    Let's consider the word <strong>"run"</strong>. Run is a single word which could mean many different
+                    things depending on the <strong>context</strong>.
+                </p>
+                <ul>
+                    <li>“I will run home” – means to move quickly on foot</li>
+                    <li>“She ran the 1500m” – means to run in a race</li>
+                    <li>“He is running for president” – means vying for an official position</li>
+                    <li>“The app is running” – means the software application is still open and active</li>
+                    <li>“Go for a run” – means running as a form of exercise</li>
+                </ul>
+                <p><em>and the list goes on.</em></p>
+                <br><br>
+                <p>A similar scenario plays out when you use the<code class="codee">this</code>keyword in your
+                    JavaScript code. When you do so, it automatically
+                    resolves to an object or scope depending on the context at which is was defined.
+                    <br><br>
+                    What are the possible contexts? And how can we use that information to deduce which object a<code
+                        class="codee">this</code>call will resolve to?
+                </p>
+                <h2>this Context</h2>
+                <p>When used in a function, the<code class="codee">this</code>keyword simply points to an object to
+                    which it is bound. It answers the question of
+                    where it should get some value or data from:</p>
+                <code>function alert() {
+                console.log( this.name + 'is calling');
+                }</code>
+                <p>In the function above, the<code class="codee">this</code>keyword is referring to an object to which
+                    it is bound <strong>so it gets the "name" property from there</strong>.
+
+                    But how do you know which object the function is bound to? How do you find out what<code
+                        class="codee">this</code>is referring to?
+
+                    To do so, we need to take a detailed look at how functions are bound to objects.</p>
+                <h2>Types of Binding in JavaScript</h2>
+                <p>There are generally four kinds of bindings:</p>
+                <ul>
+                    <li>Default Binding</li>
+                    <li>Implicit Binding</li>
+                    <li>Explicit Binding</li>
+                    <li>Constructor Call Binding</li>
+                </ul>
+                <h3>Default Binding in JavaScript</h3>
+                <p>One of the first rules to remember is that if the function housing a<code
+                        class="codee">this</code>reference is a <strong>standalone function</strong>, then that
+                    function is bound to the <strong>global object</strong>.</p>
+                <code>function alert() {
+                console.log( this.name + 'is calling');
+                }
+                
+                var name = "Kingsley";
+                alert(); // Kingsley</code>
+                <p>As you can see,<code class="codee">name()</code>is a standalone, unattached function, so it is bound
+                    to the global scope. As a result, the
+                    <code class="codee">this.name</code>reference resolves to the global variable<code
+                        class="codee">var name = 'Kingsley'</code>.
+                    <br><br>
+                    This rule, however, doesn't hold if<code class="codee">name()</code>were to be defined in strict
+                    mode:
+                </p>
+                <code>function alert() {
+                "use strict";
+                console.log( this.name + 'is calling' );
+                }
+                
+                var name = 'Kingsley';
+                alert(); // TypeError: `this` is `undefined`</code>
+                <p>When set in strict mode, the<code class="codee">this</code>reference is set to undefined.</p>
+                <h3>Implicit Binding in JavaScript</h3>
+                <p>Another scenario to look out for is whether the function is attached to an object (its context)
+                    <strong>at call site</strong>.
+                    <br><br>
+                    According to the binding rule in JavaScript, a function can use an object as its context only if
+                    that object is bound to
+                    it at the call site. This form of binding is known as implicit binding.
+                    <br><br>
+                    Here is what I mean by that:
+                </p>
+                <code>function alert() {
+                console.log( this.age + 'years old' );
+                }
+                
+                var myObj {
+                age: 22,
+                alert: alert
+                }
+                
+                myObj.alert() // 22 years old</code>
+                <p>In this example, the first object has a reference of<code class="codee">alert</code>explicitly
+                    defined in it. You might be
+                    tempted to say that
+                    <code class="codee">alert</code>now owns the object or is now a method on the object. But this
+                    really isn't true.
+                    <br><br>
+                    Based on how JavaScript works, the function<code class="codee">alert()</code>only becomes bound
+                    to<code class="codee">myObj</code>(and hence, becomes
+                    a method) when it
+                    has the object attached to it at call site. So it doesn't matter if the<code
+                        class="codee">alert</code>function is defined as a property in the object or not.
+                    <br><br>
+                    In other words, the first example is no different from this:
+                </p>
+                <code>function alert() {
+                console.log( this.age + 'years old');
+                }
+                
+                var myObj {
+                age: 22
+                }
+                
+                myObj.alert() // 22 years old</code>
+                <p>In this case, even without having<code class="codee">alert</code>defined as a field in the object,
+                    running<code class="codee">obj.alert()</code>will first insert<code class="codee">alert</code>as
+                    a method in the object before resolving it as its<code class="codee">this</code>context.
+                    <br><br>
+                    In both of these cases, we say that<code class="codee">alert</code>is implicitly bound to its
+                    context. We do that simply by examining the call
+                    site.
+                </p>
+                <h3>Explicit binding in JavaScript</h3>
+                <p>We saw that implicit binding had to do with having a reference in that object (whether pre-defined or
+                    inserted at call
+                    site).
+                    <br><br>
+                    But what if we want to <strong>force</strong> a function to use an object as its context without
+                    putting a property function reference on
+                    the object?
+                    <br><br>
+                    We have two utility methods to achieve this:<code class="codee">call()</code>and<code
+                        class="codee">apply()</code>.
+                    <br><br>
+                    Along with a couple other set of utility functions, these two utilities are available to all
+                    functions in JavaScript via
+                    the [[Prototype]] mechanism.
+                    <br><br>
+                    To explicitly bind a function call to a context, you simply have to invoke the<code
+                        class="codee">call()</code>on that function and pass in the
+                    context object as parameter:
+                </p>
+                <code>function alert() {
+                console.log( this.age + 'years old'!');
+                }
+                
+                var myObj {
+                age: 22
+                }
+                
+                alert.call(myObj); // 22 years old</code>
+                <p>Even if you were to pass around that function multiple times to new variables (currying), every
+                    invocation will use the
+                    same context because it has been locked (explicitly bound) to that object. This is called
+                    <strong>hard binding</strong>.
+                </p>
+                <code>function alert() {
+                console.log( this.age );
+                }
+                
+                var obj = {
+                age: 22
+                };
+                
+                var bar = function() {
+                alert.call( myobj );
+                };
+                
+                bar(); // 2
+                setTimeout( bar, 100 ); // 22
+                // a hard-bound `bar` can no longer have its `this` context overridden
+                bar.call( window ); // still 22</code>
+                <p>Hard binding is a perfect way to lock a context into a function call and truly make that function
+                    into a method.</p>
+                <h3>Constructor Call Binding in JavaScript</h3>
+                <p>The final and perhaps most interesting kind of binding is the new binding which also accentuates the
+                    unusual behavior of
+                    JavaScript in comparison to other class-based languages.
+                    <br><br>
+                    When a function is invoked with the<code class="codee">new</code>keyword in front of it, otherwise
+                    known as a <strong>constructor call</strong>, the following things occur:
+                </p>
+                <ol>
+                    <li>A brand new object is created (or constructed)</li>
+                    <li>The newly constructed object is [[Prototype]]-linked to the function that constructed it</li>
+                    <li>The newly constructed object is set as the<code class="codee">this</code>binding for that
+                        function call.</li>
+                </ol>
+                <p>Let's see this in code to get a better understanding:</p>
+                <code>function giveAge(age) {
+                this.age = age;
+                }
+                var bar = new giveAge( 22 );
+                console.log( bar.age ); // 22</code>
+                <p>By calling<code class="codee">giveAge(..)</code>with<code class="codee">new</code>in front of it,
+                    we’ve constructed a new object and set that new object as the<code class="codee">this</code>for
+                    the call of<code class="codee">foo(..)</code>.
+                    <br><br>
+                    So<code class="codee">new</code>is the final way that you can bind a function call’s<code
+                        class="codee">this</code>.
+                </p>
+                <h2>Conclusion</h2>
+                <ul>
+                    <li>The<code class="codee">this</code>keyword, when used in a function, binds that function to a
+                        context object</li>
+                    <li>There are four kinds of bindings: default binding, implicit binding, explicit binding and
+                        constructor call binding (new)</li>
+                    <li>Knowing these four rules will help you easily discern the context for a<code
+                            class="codee">this</code>reference.</li>
+                </ul>
+
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 9 -->
+        <section class="main-section" id="Prototypes">
+            <header><u>Prototypes</u></header>
+            <article>
+                <p>When you define a function within JavaScript, it comes with a few pre-defined properties; one of
+                    these is the illusive
+                    prototype.</p>
+                <h2>What is Prototype?</h2>
+                <p>The prototype property is initially an empty object, and can have members added to it - as you would
+                    any other object.</p>
+                <code>var myObject = function(name){
+                this.name = name;
+                return this;
+                };
+                
+                console.log(typeof myObject.prototype); // object
+                
+                myObject.prototype.getName = function(){
+                return this.name;
+                };</code>
+                <p>In the snippet above, we’ve created a function, but if we call<code class="codee">myObject()</code>,
+                    it will simply return the<code class="codee">window</code>object,
+                    because it was defined within the global scope.<code class="codee">this</code>will therefore return
+                    the global object, as it has not yet been
+                    instantiated (more on this later).</p>
+                <code>console.log(myObject() === window); // true</code>
+                <h2>The Secret Link</h2>
+                <p class="note"><span>NOTE:</span><br>Every object within JavaScript has a “secret” property.</p>
+                <br>
+                <p>the “secret” link that makes prototype work the way it does.</p>
+                <br><br>
+                <p>Every object within JavaScript has a “secret” property added to it when it is defined or
+                    instantiated, named<code class="codee">__proto__</code>;
+                    this is how the prototype chain is accessed. However, it is not a good idea to access<code
+                        class="codee">__proto__</code>within your application,
+                    as it is not available in all browsers.</p>
+                <br><br>
+                <p>The<code class="codee">__proto__</code>property shouldn’t be confused with an object's prototype, as
+                    they are two separate properties; that said,
+                    they do go hand in hand. It's important to make this distinction, as it can be quite confusing at
+                    first! What does this
+                    mean exactly? Let me explain. When we created the myObject function, we were defining an object of
+                    type<code class="codee">Function</code>.</p>
+                <code>console.log(typeof myObject); // function</code>
+                <p>For those unaware,<code class="codee">Function</code>is a predefined object in JavaScript, and, as a
+                    result, has its own properties (e.g.<code class="codee">length</code>
+                    and<code class="codee">arguments</code>) and methods (e.g.<code class="codee">call</code>and <code
+                        class="codee">apply</code>). And yes, it, too, has its own prototype object, as well as the
+                    secret
+                    <code class="codee">__proto__</code>link. This means that, somewhere within the JavaScript engine,
+                    there is a bit of code that could be similar to
+                    the following:
+                </p>
+                <code>Function.prototype = {
+                arguments: null,
+                length: 0,
+                call: function(){
+                // secret code
+                },
+                apply: function(){
+                // secret code
+                }
+                ...
+                }</code>
+                <p>In truth, it probably wouldn’t be quite so simplistic; this is merely to illustrate how the prototype
+                    chain works.</p>
+                <br><br>
+                <p>So we have defined<code class="codee">myObject</code>as a function and given it one argument, <code
+                        class="codee">name</code>; but we never set any properties, such as
+                    <code class="codee">length</code>or methods, such as<code class="codee">call</code>. So why does the
+                    following work?
+                </p>
+                <code>console.log(myObject.length); // 1 (being the amount of available arguments)</code>
+                <p>This is because, when we defined<code class="codee">myObject</code>, it created a<code
+                        class="codee">__proto__</code> property and set its value to<code
+                        class="codee">Function.prototype</code>
+                    (illustrated in the code above).
+                    <br>
+                    So, when we access<code class="codee">myObject.length</code>, it looks for a property of<code
+                        class="codee">myObject</code>called<code class="codee">length</code>
+                    and doesn’t find one; it then travels up the chain, via the<code class="codee">__proto__link</code>,
+                    finds the property and returns it.
+                </p>
+                <br><br>
+                <p>You might be wondering why<code class="codee">length</code>is set to<code class="codee">1</code>and
+                    not<code class="codee">0</code> - or any other number for that fact. This is because<code
+                        class="codee">myObject</code>is
+                    in fact an instance of<code class="codee">Function</code>.</p>
+                <code>console.log(myObject instanceof Function); // true
+                console.log(myObject === Function); // false</code>
+                <p>When an instance of an object is created, the<code class="codee">__proto__</code>property is updated
+                    to point to the constructor’s prototype,
+                    which, in this case, is<code class="codee">Function</code>.</p>
+                <code>console.log(myObject.__proto__ === Function.prototype) // true</code>
+                <p>Additionally, when you create a new<code class="codee">Function</code>object, the native code inside
+                    the<code class="codee">Function</code>constructor will count the
+                    number of arguments and update<code class="codee">this.length</code>accordingly, which, in this
+                    case, is<code class="codee">1</code>.
+                    <br><br>
+                    If, however, we create a new instance of<code class="codee">myObject</code>using the<code
+                        class="codee">new</code>keyword,<code class="codee">__proto__</code>will point to<code
+                        class="codee">myObject.prototype</code>as
+                    <code class="codee">myObject</code>is the constructor of our new instance.
+                </p>
+                <code>var myInstance = new myObject(“foo”);
+                console.log(myInstance.__proto__ === myObject.prototype); // true</code>
+                <p>In addition to having access to the native methods within the<code
+                        class="codee">Function</code>.prototype, such as<code class="codee">Call</code>and<code
+                        class="codee">apply</code>, we now have
+                    access to <code class="codee">myObject</code>’s method,<code class="codee">getName</code>.</p>
+                <code>console.log(myInstance.getName()); // foo
+                
+                var mySecondInstance = new myObject(“bar”);
+                
+                console.log(mySecondInstance.getName()); // bar
+                console.log(myInstance.getName()); // foo</code>
+                <p>As you can imagine, this is quite handy, as it can be used to blueprint an object, and create as many
+                    instances as
+                    needed.</p>
+                <h2>Why is Using Prototype Better?</h2>
+                <p>Say, for instance, that we are developing a canvas game and need several (possibly hundreds of)
+                    objects on the screen at
+                    once. Each object requires its own properties, such as<code class="codee">x</code>and<code
+                        class="codee">y</code>coordinates,<code class="codee">width</code>,<code
+                        class="codee">height</code>, and many others.
+                    <br><br>
+                    We might do it as follows:
+                </p>
+                <code>var GameObject1 = {
+                x: Math.floor((Math.random() * myCanvasWidth) + 1),
+                y: Math.floor((Math.random() * myCanvasHeight) + 1),
+                width: 10,
+                height: 10,
+                draw: function(){
+                myCanvasContext.fillRect(this.x, this.y, this.width, this.height);
+                }
+                ...
+                };
+                
+                var GameObject2 = {
+                x: Math.floor((Math.random() * myCanvasWidth) + 1),
+                y: Math.floor((Math.random() * myCanvasHeight) + 1),
+                width: 10,
+                height: 10,
+                draw: function(){
+                myCanvasContext.fillRect(this.x, this.y, this.width, this.height);
+                }
+                ...
+                };</code>
+                <p>... do this 98 more times ...</p>
+                <br><br>
+                <p>What this will do is create all these objects within memory - all with separate definitions for
+                    methods, such as<code class="codee">draw</code>
+                    and whatever other methods may be required. This is certainly not ideal, as the game will bloat the
+                    browsers allocated
+                    JavaScript memory, and make it run very slowly... or even stop responding.
+                    <br><br>
+                    While this probably wouldn’t happen with only 100 objects, it still can serve to be quite a
+                    performance hit, as it will
+                    need to look up one hundred different objects, rather than just the single<code
+                        class="codee">prototype</code>object.
+                </p>
+                <br><br>
+                <p>To make the application run faster (and follow best practices), we can (re)define the prototype
+                    property of the
+                    <code class="codee">GameObject</code>; every instance of<code class="codee">GameObject</code>will
+                    then reference the methods within<code class="codee">GameObject.prototype</code>as if they were
+                    their own methods.
+                </p>
+                <code>// define the GameObject constructor function
+                var GameObject = function(width, height) {
+                this.x = Math.floor((Math.random() * myCanvasWidth) + 1);
+                this.y = Math.floor((Math.random() * myCanvasHeight) + 1);
+                this.width = width;
+                this.height = height;
+                return this;
+                };
+                
+                // (re)define the GameObject prototype object
+                GameObject.prototype = {
+                x: 0,
+                y: 0,
+                width: 5,
+                width: 5,
+                draw: function() {
+                myCanvasContext.fillRect(this.x, this.y, this.width, this.height);
+                }
+                };</code>
+                <p>We can then instantiate the GameObject 100 times.</p>
+                <code>var x = 100,
+                arrayOfGameObjects = [];
+                
+                do {
+                arrayOfGameObjects.push(new GameObject(10, 10));
+                } 
+                while(x--);</code>
+                <p>Now we have an array of 100 GameObjects, which all share the same prototype and definition of
+                    the<code class="codee">draw</code>method, which
+                    drastically saves memory within the application.
+                    <br><br>
+                    When we call the<code class="codee">draw</code>method, it will reference the exact same function.
+                </p>
+                <code>var GameLoop = function() {
+                for(gameObject in arrayOfGameObjects) {
+                gameObject.draw();
+                }
+                };</code>
+                <h2>Prototype is a Live Object</h2>
+                <p>An object's prototype is a live object, so to speak. This simply means that, if, after we create all
+                    our GameObject
+                    instances, we decide that, instead of drawing a rectangle, we want to draw a circle, we can update
+                    our<code class="codee">GameObject.prototype.draw</code>method accordingly.</p>
+                <code>GameObject.prototype.draw = function() {
+                myCanvasContext.arc(this.x, this.y, this.width, 0, Math.PI*2, true);
+                }</code>
+                <p>And now, all the previous instances of<code class="codee">GameObject</code>and any future instances
+                    will draw a circle.</p>
+                <h2>Updating Native Objects Prototypes</h2>
+                <p>Yes, this is possible. You may be familiar with JavaScript libraries, such as Prototype, which take
+                    advantage of this
+                    method.
+                    <br><br>
+                    Let’s use a simple example:
+                </p>
+                <code>String.prototype.trim = function() {
+                return this.replace(/^\s+|\s+$/g, ‘’);
+                };</code>
+                <p>We can now access this as a method of any string:</p>
+                <code>“ foo bar “.trim(); // “foo bar”</code>
+                <p>There is a minor downside to this, however. For example, you may use this in your application; but a
+                    year or two down
+                    the road, a browser may implement an updated version of JavaScript that includes a native<code
+                        class="codee">trim</code>method within the<code class="codee">String</code>'s prototype.
+                    <br><br>
+                    This means that your definition of<code class="codee">trim</code>will override the native version!
+                    <br><br>
+                    To overcome this,
+                    we can add a simple check before defining the function.
+                </p>
+                <code>if(!String.prototype.trim) {
+                String.prototype.trim = function() {
+                return this.replace(/^\s+|\s+$/g, ‘’);
+                };
+                }</code>
+                <p>Now, if it exists, it will use the native version of the<code class="codee">trim</code>method.</p>
+                <p class="note"><span>NOTE:</span><br>As a rule of thumb, it's generally considered a best practice to
+                    avoid extending native objects. But, as with anything,
+                    rules can be broken, if needed.</p>
+
+            </article>
+        </section>
+        <hr>
+
+        <!-- Section 10 -->
+        <section class="main-section" id="Reference">
+            <header><u>Reference</u></header>
+            <article>
+                <p>All the above content knowledge is accumulated and curated from a variety of technical writings.</p>
+            </article>
+        </section>
+        <hr>
+
+    </main>
+</body>
+
+</html>
